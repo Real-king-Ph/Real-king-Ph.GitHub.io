@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容  如何搭建环境 C++的使用  classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNode &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU15445 Project 0 Trie_Tree">
+<meta property="og:url" content="http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/">
+<meta property="og:site_name" content="RK&#39;s blog">
+<meta property="og:description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容  如何搭建环境 C++的使用  classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNode &amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png">
+<meta property="og:image" content="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png">
+<meta property="article:published_time" content="2023-09-27T06:44:40.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:42:36.904Z">
+<meta property="article:author" content="ph">
+<meta property="article:tag" content="CMU15-445">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Trie_Tree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CMU15445 Project 0 Trie_Tree</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="RK&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+  <!-- memraid -->
+  
+    <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        var mermaidOptions = {"theme":"neutral"};
+        mermaid.initialize(mermaidOptions);
+      }
+    </script>
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr" >
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/links/">友链</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/10/15/2023-09-12-2023-10-15-heart-of-Clean-Springs/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&text=CMU15445 Project 0 Trie_Tree"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&is_video=false&description=CMU15445 Project 0 Trie_Tree"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CMU15445 Project 0 Trie_Tree&body=Check out this article: http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&name=CMU15445 Project 0 Trie_Tree&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&t=CMU15445 Project 0 Trie_Tree"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text"> 实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text"> 环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug"><span class="toc-number">2.1.</span> <span class="toc-text"> Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text"> C++ 的使用</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CMU15445 Project 0 Trie_Tree
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ph</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-27T06:44:40.000Z" class="dt-published" itemprop="datePublished">2023-09-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CMU15-445/">CMU15-445</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C++</a>, <a class="p-category" href="/tags/CMU15-445/" rel="tag">CMU15-445</a>, <a class="p-category" href="/tags/Trie-Tree/" rel="tag">Trie_Tree</a>, <a class="p-category" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="实验目标"><a class="markdownIt-Anchor" href="#实验目标"></a> 实验目标</h2>
+<p>该实验为 <code>CMU 15-445/645</code> 的前置实现。主要考察 C++ 使用的功底。</p>
+<p>我所采用的课程为 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">fall2022</a><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 相关代码可以在 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">Release</a><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 中下载</p>
+<p>该课程主要涉及到两方面内容</p>
+<ul>
+<li>如何搭建环境</li>
+<li>C++的使用</li>
+</ul>
+<pre class="mermaid">classDiagram
+class TrieNode {
+ + TrieNode(char keychar)
+ + TrieNode(TrieNode &&orher_trie_node)
+ + HasChild(char key_char) bool
+ + HasChildren() bool
+ + IsEndNode() bool
+ + GetKeyChar() char
+ + InsertChildNode(char key_char, unique_ptr~TrieNode~ && child) unque_ptr~TrieNode~
+ + GetChildNode(char key_char) unique_ptr~TrieNode~
+ + RemoveChildNode(char key_char) void
+ + SetEndNode(bool is_end) void
+ # char key_char_
+ # bool is_end_
+ # unordered_map |char, unique_ptr~TrieNode~| children_
+}
+
+class TrieNodeWithValue {
+ - T value_
+ + TrieNodeWithValue(TrieNode &&trieNode, T value)
+ + TrieNodeWithValue(char key_char, T value)
+ + T GetValue() T
+}
+
+TrieNode <|-- TrieNodeWithValue</pre>
+<pre class="mermaid">classDiagram
+class Trie {
+ - std::unique_ptr~TrieNode~ root_
+ - ReaderWriterLatch latch_
+ + Trie()
+ + Insert(const std::string &key, T value) bool
+ + Remove(const std::string &key,) bool
+ + GetValue(const std::string &key, bool success) T
+}</pre>
+<h2 id="环境的搭建"><a class="markdownIt-Anchor" href="#环境的搭建"></a> 环境的搭建</h2>
+<p>我采用的是使用虚拟机(Ubuntu) + 本地电脑ssh 的开发方式。</p>
+<p>vscode 中安装如下几个插件</p>
+<ul>
+<li><code>C/C++</code></li>
+<li><code>CMake</code></li>
+<li><code>CMake Tools</code></li>
+<li><code>Remote - SSH</code></li>
+</ul>
+<p>首先我们首先需要下载并解压所需要的 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">代码</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/cmu-db/bustub/archive/refs/tags/v20221128-2022fall.tar.gz</span><br><span class="line">tar -zxvf v20221128-2022fall.tar.gz  </span><br></pre></td></tr></table></figure>
+<p>然后直接用 <code>VScode</code> SSH直接进入远程的电脑的当前目录下。</p>
+<p>之后安装必要的软件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo build_support/packages.sh</span><br></pre></td></tr></table></figure>
+<p>之后看 Vscode 几个选项需要我们设置一下</p>
+<div id="tmp_tag"></div>
+![VSCODE](https://s2.loli.net/2023/10/01/1zx8TOX9fcWYEF2.png)
+<p>我们点击最下方的</p>
+<p><a href="#tmp_tag"><i class="fa-solid fa-gear fa-beat"></i> 生成</a></p>
+<p><img src="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png" alt="image-20231001205625799" /></p>
+<p>然后选择 <code>Clang 12.01 x86_64-pc-linux-gnu</code> 即可愉快的coding了。</p>
+<h3 id="debug"><a class="markdownIt-Anchor" href="#debug"></a> Debug</h3>
+<p>在 <i class="fa-solid fa-gear fa-beat"></i> 生成旁边有个按钮 <code>[all]</code> 把他切换为你所需要的那个就可以了。</p>
+<p><img src="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png" alt="" /></p>
+<p>所采用的测试方法为 <code>GTest</code></p>
+<p>只需要将目标 Test 文件下的 <code>DIABLE_</code> 删除就可以进行 Test 了</p>
+<p>例如在路径 <code>/test/primer/starter_trie_test.cpp</code> 将所有 <code>DIABLE_</code> 删除，之后就可以尝试输出结果，按 <i class="fa-solid fa-bug"></i> 就可以在自己打的断点进行调试。按 <i class="fa-solid fa-play"></i> 就可以直接出结果</p>
+<blockquote>
+<p><i class="fa-solid fa-bug"></i> 调试<br />
+<img src="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png" alt="Debug &quot;你正在调试&quot;" /></p>
+</blockquote>
+<blockquote>
+<p><i class="fa-solid fa-play"></i> 运行结果<br />
+<img src="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png" alt="Run &quot;运行代码的结果&quot;" /></p>
+</blockquote>
+<h2 id="c-的使用"><a class="markdownIt-Anchor" href="#c-的使用"></a> C++ 的使用</h2>
+<p>这方面到没有太多可以讲的。</p>
+<p>主要抓住 <code>std::unique_ptr</code> 的用法就可以了。</p>
+<p>下面是几个个使用的例子。</p>
+<p>遍历字典树的节点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> cur_node = &amp;<span class="keyword">this</span>-&gt;root_; <span class="comment">// ! 指向智能指针的指针</span></span><br><span class="line"><span class="keyword">auto</span> par_node = cur_node;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cur_node != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">  cur_node = cur_node-&gt;<span class="built_in">get</span>()-&gt; <span class="built_in">GetChildNode</span>(ch);</span><br><span class="line">  ...</span><br><span class="line">  par_node = cur_node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如何在父类指针上动态构建子类节点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> tmp_node = std::<span class="built_in">make_unique</span>&lt;T&gt;(std::<span class="built_in">move</span>(*cur_node) , value);</span><br><span class="line">par_node-&gt; <span class="built_in">get</span>() -&gt; <span class="built_in">InsertChildNode</span>(ch, std::<span class="built_in">move</span>(*tmp_node));</span><br><span class="line">cur_node = par_node-&gt; <span class="built_in">GetChildNode</span>(ch);</span><br></pre></td></tr></table></figure>
+<p>通过强制转换得到子类空间的值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> tmp_node = <span class="keyword">dynamic_cast</span>&lt;TrieNodeWithValue&lt;T&gt; *&gt;(cur_node-&gt;<span class="built_in">get</span>());</span><br></pre></td></tr></table></figure>
+<p>由于课程已经结束了，实在无法完成的话，可以参考我的<a href="/assets/others/CMU15445_project_0_c++_prime.cpp">代码</a>。</p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>CMU 15-445/645 fall2022 官方网址 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>bustub 源码地址 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub">https://github.com/cmu-db/bustub</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+  </div>
+</article>
+
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/links/">友链</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text"> 实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text"> 环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug"><span class="toc-number">2.1.</span> <span class="toc-text"> Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text"> C++ 的使用</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&text=CMU15445 Project 0 Trie_Tree"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&is_video=false&description=CMU15445 Project 0 Trie_Tree"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CMU15445 Project 0 Trie_Tree&body=Check out this article: http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&name=CMU15445 Project 0 Trie_Tree&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/&t=CMU15445 Project 0 Trie_Tree"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    ph
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/links/">友链</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+<!-- Waline Comments -->
+
+<div id="wcomments"></div>
+<link href='//cdn.jsdelivr.net/npm/@waline/client/dist/waline.css' rel='stylesheet' />
+<style type="text/css">
+:root {
+  --waline-white: #000;
+  --waline-light-grey: #666;
+  --waline-dark-grey: #999;
+
+  /* 布局颜色 */
+  --waline-color: #888;
+  --waline-bg-color: #1e1e1e;
+  --waline-bg-color-light: #272727;
+  --waline-border-color: #333;
+  --waline-disable-bg-color: #444;
+  --waline-disable-color: #272727;
+
+  /* 特殊颜色 */
+  --waline-bq-color: #272727;
+
+  /* 其他颜色 */
+  --waline-info-bg-color: #272727;
+  --waline-info-color: #666;
+}
+body {
+  --waline-box-shadow: 0 12px 40px #0f0e0d;
+}
+
+</style>
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  init({
+    el: '#wcomments',
+    serverURL: 'https://waline-one-delta.vercel.app/',
+    emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/Real-king-Ph/emoji/hoyo_emoji',
+        'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji'
+      ],
+    imageUploader: false,
+    reaction: true,
+    dark: 'auto'
+  });
+</script>
+
+
+</body>
+</html>
