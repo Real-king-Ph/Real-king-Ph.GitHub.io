@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[^cmu_15445_fall2022] 相关代码可以在 Release[^bustub_source_code] 中下载 [^cmu_15445_fall2022]: CMU 15-445&#x2F;645 fall2022 官方网址 https:&#x2F;&#x2F;15445.courses">
+    <meta name="description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容   如何搭建环境   C++的使用   classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CMU15445 Project 0 Trie_Tree">
 <meta property="og:url" content="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/">
 <meta property="og:site_name" content="RK&#39;s blog">
-<meta property="og:description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[^cmu_15445_fall2022] 相关代码可以在 Release[^bustub_source_code] 中下载 [^cmu_15445_fall2022]: CMU 15-445&#x2F;645 fall2022 官方网址 https:&#x2F;&#x2F;15445.courses">
+<meta property="og:description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容   如何搭建环境   C++的使用   classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNod">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png">
@@ -201,13 +201,15 @@
   <div class="content e-content" itemprop="articleBody">
     <h2 id="实验目标">实验目标</h2>
 <p>该实验为 <code>CMU 15-445/645</code> 的前置实现。主要考察 C++ 使用的功底。</p>
-<p>我所采用的课程为 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">fall2022</a>[^cmu_15445_fall2022] 相关代码可以在 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">Release</a>[^bustub_source_code] 中下载</p>
-<p>[^cmu_15445_fall2022]: CMU 15-445/645 fall2022 官方网址 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a><br>
-[^bustub_source_code]: bustub 源码地址 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub">https://github.com/cmu-db/bustub</a></p>
+<p>我所采用的课程为 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">fall2022</a><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 相关代码可以在 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">Release</a><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 中下载</p>
 <p>该课程主要涉及到两方面内容</p>
-<ul>
-<li>如何搭建环境</li>
-<li>C++的使用</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如何搭建环境</p>
+</li>
+<li class="lvl-2">
+<p>C++的使用</p>
+</li>
 </ul>
 <pre class="mermaid">classDiagram
 class TrieNode {
@@ -246,11 +248,19 @@ class Trie {
 <h2 id="环境的搭建">环境的搭建</h2>
 <p>我采用的是使用虚拟机(Ubuntu) + 本地电脑ssh 的开发方式。</p>
 <p>vscode 中安装如下几个插件</p>
-<ul>
-<li><code>C/C++</code></li>
-<li><code>CMake</code></li>
-<li><code>CMake Tools</code></li>
-<li><code>Remote - SSH</code></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>C/C++</code></p>
+</li>
+<li class="lvl-2">
+<p><code>CMake</code></p>
+</li>
+<li class="lvl-2">
+<p><code>CMake Tools</code></p>
+</li>
+<li class="lvl-2">
+<p><code>Remote - SSH</code></p>
+</li>
 </ul>
 <p>首先我们首先需要下载并解压所需要的 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">代码</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/cmu-db/bustub/archive/refs/tags/v20221128-2022fall.tar.gz</span><br><span class="line">tar -zxvf v20221128-2022fall.tar.gz  </span><br></pre></td></tr></table></figure>
@@ -262,7 +272,7 @@ class Trie {
 ![VSCODE](https://s2.loli.net/2023/10/01/1zx8TOX9fcWYEF2.png)
 <p>我们点击最下方的</p>
 <p><a href="#tmp_tag"><i class="fa-solid fa-gear fa-beat"></i> 生成</a></p>
-<p><img src="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png" alt=""></p>
+<p><img src="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png" alt="image-20231001205625799"></p>
 <p>然后选择 <code>Clang 12.01 x86_64-pc-linux-gnu</code> 即可愉快的coding了。</p>
 <h3 id="Debug">Debug</h3>
 <p>在 <i class="fa-solid fa-gear fa-beat"></i> 生成旁边有个按钮 <code>[all]</code> 把他切换为你所需要的那个就可以了。</p>
@@ -272,11 +282,11 @@ class Trie {
 <p>例如在路径 <code>/test/primer/starter_trie_test.cpp</code> 将所有 <code>DIABLE_</code> 删除，之后就可以尝试输出结果，按 <i class="fa-solid fa-bug"></i> 就可以在自己打的断点进行调试。按 <i class="fa-solid fa-play"></i> 就可以直接出结果</p>
 <blockquote>
 <p><i class="fa-solid fa-bug"></i> 调试<br>
-<img src="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png" alt=""></p>
+<img src="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png" alt="Debug &quot;你正在调试&quot;"></p>
 </blockquote>
 <blockquote>
 <p><i class="fa-solid fa-play"></i> 运行结果<br>
-<img src="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png" alt=""></p>
+<img src="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png" alt="Run &quot;运行代码的结果&quot;"></p>
 </blockquote>
 <h2 id="C-的使用">C++ 的使用</h2>
 <p>这方面到没有太多可以讲的。</p>
@@ -289,6 +299,15 @@ class Trie {
 <p>通过强制转换得到子类空间的值</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> tmp_node = <span class="keyword">dynamic_cast</span>&lt;TrieNodeWithValue&lt;T&gt; *&gt;(cur_node-&gt;<span class="built_in">get</span>());</span><br></pre></td></tr></table></figure>
 <p>由于课程已经结束了，实在无法完成的话，可以参考我的<a href="/assets/others/CMU15445_project_0_c++_prime.cpp">代码</a>。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>CMU 15-445/645 fall2022 官方网址 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>bustub 源码地址 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub">https://github.com/cmu-db/bustub</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 
   </div>
 </article>

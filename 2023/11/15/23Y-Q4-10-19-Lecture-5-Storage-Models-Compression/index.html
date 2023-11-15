@@ -234,112 +234,142 @@ root((Lecture 5))
 <h3 id="OLTP">OLTP</h3>
 <p>OLTP: On-Line Transaction Processing</p>
 <p>每次快速的对一个小范围的数据进行读取、更新的操作。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmWjGBjz9tPJNKJsWvAJHn6S1Y1Zg4bzwUFh4rGbkmr7Nx" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmWjGBjz9tPJNKJsWvAJHn6S1Y1Zg4bzwUFh4rGbkmr7Nx" alt="OLTP"></p>
 <h3 id="OLAP">OLAP</h3>
 <p>OLAP: On-Line Analytical Processing</p>
 <p>OLAP 是用来支持复杂的分析操作，提供决策支持等</p>
-<p><img src="https://cf-ipfs.com/ipfs/Qmcr9z7hT4zstPoYQrLUmicaivD5rt8dRqxARZu7U6DVHF" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/Qmcr9z7hT4zstPoYQrLUmicaivD5rt8dRqxARZu7U6DVHF" alt="image"></p>
 <h3 id="HTAP">HTAP</h3>
 <p>Hybrid Transaction + Analytical Processing</p>
 <p>一种新的 workload ，将 OLTP 和 OOLAP 结合起来。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmSaQ4beZHaMzsfsMTe1tFL1ybqRSj7My4684j1kn1coer" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmSaQ4beZHaMzsfsMTe1tFL1ybqRSj7My4684j1kn1coer" alt="OLTP OLAP HTAP"></p>
 <hr>
 <h2 id="Stroage-Models">Stroage Models</h2>
 <h3 id="N-Ary-Storage-Model-NSM">N-Ary Storage Model (NSM)</h3>
 <p>在 <code>n-ary</code> 的存储模式中，DBMS 连续的存储所有的、包含所有 <code>arributes</code> 的 <code>tuple</code> 在一个单独的页面中。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmVYrVctydHbc4A1c5WwD3jczyYA94uhNExZgn6mYfAje8" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmVYrVctydHbc4A1c5WwD3jczyYA94uhNExZgn6mYfAje8" alt="n-ary-model"></p>
 <p>这对于 OLTP 来说是十分理想的。</p>
 <p>Advantages:</p>
-<ul>
-<li>插入，更新，删除非常快</li>
-<li>对于需要整个 <code>tuple</code> 的查询非常友好</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>插入，更新，删除非常快</p>
+</li>
+<li class="lvl-2">
+<p>对于需要整个 <code>tuple</code> 的查询非常友好</p>
+</li>
 </ul>
 <p>Disadvantages:</p>
-<ul>
-<li>对于需要扫描整个表或者只需要一个属性的查询非常不好</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对于需要扫描整个表或者只需要一个属性的查询非常不好</p>
+</li>
 </ul>
 <blockquote></blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/QmR8EJYooMcLuaGZLMzLeDK92r9svS3mk8ay2VcfTDgJY5" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmR8EJYooMcLuaGZLMzLeDK92r9svS3mk8ay2VcfTDgJY5" alt="image"></p>
 <h3 id="Decompositrion-Storage-Model-DSM">Decompositrion Storage Model (DSM)</h3>
 <p>将所有 <code>tuples</code> 中的每个 <code>attribute</code> 单独分出来进行存储</p>
 <blockquote>
 <p>也可以成为 “列存储 (column store)”</p>
 </blockquote>
 <p>对于只读的 OLAP 操作非常友好，尤其是那些只需要扫描部分 <code>attributes</code> 的操作来说。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmeW3ayCpBjFVx8rJvC4Ld5MQPuKPHT1kDciKLM1fPBeFc" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmeW3ayCpBjFVx8rJvC4Ld5MQPuKPHT1kDciKLM1fPBeFc" alt="image"></p>
 <p>Advantages:</p>
-<ul>
-<li>减少 I/O 的浪费</li>
-<li>更好的进行查询以及将数据进行压缩</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>减少 I/O 的浪费</p>
+</li>
+<li class="lvl-2">
+<p>更好的进行查询以及将数据进行压缩</p>
+</li>
 </ul>
 <p>Disadvantages:</p>
-<ul>
-<li>对于单点修改查询更新这些操作比较慢。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对于单点修改查询更新这些操作比较慢。</p>
+</li>
 </ul>
 <p>为了实现这种操作通常有两种操作方法。</p>
 <ol>
-<li>为每个属性设置固定的字长，这样我们只需要得到 <code>offset</code> 就可以准确的查找到我们所需要的数据</li>
-<li>一个更为罕见的操作是，使用一个形如 <code>(id : pos)</code> 的 tuple 来存储值，表示第 <code>id</code> 的值存储在 <code>pos</code> 位置上。</li>
+<li class="lvl-3">
+<p>为每个属性设置固定的字长，这样我们只需要得到 <code>offset</code> 就可以准确的查找到我们所需要的数据</p>
+</li>
+<li class="lvl-3">
+<p>一个更为罕见的操作是，使用一个形如 <code>(id : pos)</code> 的 tuple 来存储值，表示第 <code>id</code> 的值存储在 <code>pos</code> 位置上。</p>
+</li>
 </ol>
-<p><img src="https://cf-ipfs.com/ipfs/QmRyFvUztSXxLZKPfiEUnYBXsgh9ZfSyWfM8UcbjuM8cW4" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmRyFvUztSXxLZKPfiEUnYBXsgh9ZfSyWfM8UcbjuM8cW4" alt="image"></p>
 <h2 id="Database-Compression">Database Compression</h2>
 <p>I/O 是非常耗时的，通常是整个数据库的瓶颈，所以 DBMS 中广泛的采用压缩算法来提高 DBMS 的表现。</p>
 <p>通常我们需要在 <strong>速度</strong> 和 <strong>压缩率</strong> 之间进行取舍。</p>
 <h3 id="压缩颗粒度">压缩颗粒度</h3>
-<ul>
-<li>Block Level</li>
-<li>Tuple Level 对整个 <code>tuple</code> 进行压缩 (NSM Only)</li>
-<li>Attribute Level</li>
-<li>Columnar Level</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Block Level</p>
+</li>
+<li class="lvl-2">
+<p>Tuple Level 对整个 <code>tuple</code> 进行压缩 (NSM Only)</p>
+</li>
+<li class="lvl-2">
+<p>Attribute Level</p>
+</li>
+<li class="lvl-2">
+<p>Columnar Level</p>
+</li>
 </ul>
 <h2 id="Naive-Compression">Naive Compression</h2>
 <p>使用 “general-purpose” 的压缩算法通常也是一种解决办法。不过一旦使用着这种方法之后，DBMS 就不知道我们进行操作的数据是什么，直到解压完。</p>
 <p>provided as input:<br>
 → LZO (1996), LZ4 (2011), Snappy (2011),<br>
 Oracle OZIP (2014), Zstd (2015)</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmRU9XswYdyhkH7e6G5MhU1oFknSRU934udLUwMhryvpnC" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmRU9XswYdyhkH7e6G5MhU1oFknSRU934udLUwMhryvpnC" alt="image"></p>
 <p>为了提高速度，我们需要另外的压缩方法，即使是在压缩之后，我们也有办法获取其中的信息来加速。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmfWREJzu1jZZ1k9WbwDMCJxedBfqz9bdPWc25LWR5b1RE" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmfWREJzu1jZZ1k9WbwDMCJxedBfqz9bdPWc25LWR5b1RE" alt="image"></p>
 <h2 id="Columnar-Compression">Columnar Compression</h2>
 <h3 id="Run-Length-Encoding-RLE">Run-Length Encoding(RLE)</h3>
 <p>可以将一些连续出现在同一列上的值压缩成一个形如<code>(value : pos : num)</code> 的 <code>triplets</code>。</p>
 <p>其中:</p>
 <ol>
-<li><code>value</code> 表示值</li>
-<li><code>pos</code> 表示该值的起始位置</li>
-<li><code>num</code> 表示该值重复的次数</li>
+<li class="lvl-3">
+<p><code>value</code> 表示值</p>
+</li>
+<li class="lvl-3">
+<p><code>pos</code> 表示该值的起始位置</p>
+</li>
+<li class="lvl-3">
+<p><code>num</code> 表示该值重复的次数</p>
+</li>
 </ol>
-<p><img src="https://cf-ipfs.com/ipfs/QmeDPCDfxrA8q7pA3emRu5oX56W6PmUwGyG7V2GcGY6Rhw" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmeDPCDfxrA8q7pA3emRu5oX56W6PmUwGyG7V2GcGY6Rhw" alt="image"></p>
 <blockquote>
 <p>不过该方法可能存在一些缺陷</p>
 </blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/QmbNbjXVMavSqu2ct7UQF4MqXBXen6Bu5nAJ6FyqhokcHY" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmbNbjXVMavSqu2ct7UQF4MqXBXen6Bu5nAJ6FyqhokcHY" alt="image"></p>
 <blockquote>
 <p>经过转换后</p>
 </blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/Qmc8rLbNFkcyyEgb3WDL78U6BWXmyULhYF1eUhVHBctvub" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/Qmc8rLbNFkcyyEgb3WDL78U6BWXmyULhYF1eUhVHBctvub" alt="image"></p>
 <h3 id="Bit-Packing-Encoding">Bit-Packing Encoding</h3>
 <p>一些数据对我们来说是十分冗余的，我们可以通过 Bit-Packing 的方式来减少这些冗余。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmRLifwPj8CVwfxrQqLChyyMKWsAHsqvvJsbLpycA8SrAS" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmRLifwPj8CVwfxrQqLChyyMKWsAHsqvvJsbLpycA8SrAS" alt="image"></p>
 <p>将 <code>int64</code> 转换为 <code>int8</code> 大大减少了需要的空间。</p>
 <p>不过该方法存在一些缺陷，可能会存在部分信息有不符合 <code>int8</code> 的信息。</p>
 <p>因此，我们需要如下的方式进行存储。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmbnGQ8AmVdWtJvqwA2zyZyqgwTTQqrugWo8EVmgsANCun" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmbnGQ8AmVdWtJvqwA2zyZyqgwTTQqrugWo8EVmgsANCun" alt="image"></p>
 <p>不过该方法只能在额外存储信息较少的时候进行使用。</p>
 <h3 id="Bitmap-Encoding">Bitmap Encoding</h3>
 <p>当我们每个 <code>attribute</code> 较少的时候，我们可以采用 Bitmap 的方式进行存储。</p>
 <p>例如，只存在 <code>F</code> 和 <code>M</code> 两种值的时候，我们就可以是由 <code>01</code> 来表示是或者不是。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmVHXmXPg4af1uc5zZ8PT4S56cjMyXtn7Vux1WqHQRh3Zv" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmVHXmXPg4af1uc5zZ8PT4S56cjMyXtn7Vux1WqHQRh3Zv" alt="image"></p>
 <h3 id="Delta-Encoding">Delta Encoding</h3>
 <p>在许多情况下，例如室温多少，我们的统计结果里可能存在较为密集的值在一定的范围内。</p>
 <p>因此我们通过确定一个值后，往后的所有值都可以通过 <code>delta</code> 的形式存储</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmQSzbJGqVgdzv37LYb7wKa2cpWHEyc83bBd45MXKsTCPD" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmQSzbJGqVgdzv37LYb7wKa2cpWHEyc83bBd45MXKsTCPD" alt="image"></p>
 <h3 id="Incremental-Encoding">Incremental Encoding</h3>
 <p>我们通常也可以通过取 <strong>前缀 / 后缀</strong> 的形式来得到我们的最终结果。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmU21hsowqjLrA3RpLyaxDvYanP6of77ZcnsTnmxJ48GsM" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmU21hsowqjLrA3RpLyaxDvYanP6of77ZcnsTnmxJ48GsM" alt="image"></p>
 <h3 id="Dictionary-Compression">Dictionary Compression</h3>
 <p>当一张表中可能存在多个值，且这多个值存在在不同的地方，那么我们就可以通过字典的形式得到这些值所在的位置。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmaTr6bHJnc5GA4rCQkKxPqNvN9nzmtbzMRTsLhg863wEd" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmaTr6bHJnc5GA4rCQkKxPqNvN9nzmtbzMRTsLhg863wEd" alt="image"></p>
 <p>这也是最常用的压缩方法。</p>
 
   </div>
