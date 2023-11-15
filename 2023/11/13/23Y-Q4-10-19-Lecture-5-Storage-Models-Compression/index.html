@@ -9,7 +9,7 @@
     <meta name="description" content="refer to Slide refer to Note mindmap root((Lecture 5))   Workloads     OLTP     OLAP     HTAP   Storage Models     N-Ary     DSM   Columnar Compression     Run-Length Encoding     Bit-Packing Encoding">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture #05: Storage Models &amp; Compression">
-<meta property="og:url" content="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/">
+<meta property="og:url" content="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/">
 <meta property="og:site_name" content="RK&#39;s blog">
 <meta property="og:description" content="refer to Slide refer to Note mindmap root((Lecture 5))   Workloads     OLTP     OLAP     HTAP   Storage Models     N-Ary     DSM   Columnar Compression     Run-Length Encoding     Bit-Packing Encoding">
 <meta property="og:locale" content="zh_CN">
@@ -130,10 +130,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="上一篇" href="/2023/11/13/2023-09-12-2023-10-15-heart-of-Clean-Springs/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2023/11/13/23Y-Q4-10-15-heart-of-Clean-Springs/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="下一篇" href="/2023/11/13/2023-09-12-2023-09-27-CMU15445-project-0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/13/23Y-Q4-09-27-CMU15445-project-0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -146,24 +146,24 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&text=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&is_video=false&description=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lecture #05: Storage Models &amp; Compression&body=Check out this article: http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&name=Lecture #05: Storage Models &amp; Compression&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&t=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&text=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&is_video=false&description=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lecture #05: Storage Models &amp; Compression&body=Check out this article: http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&name=Lecture #05: Storage Models &amp; Compression&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&t=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#database-workloads"><span class="toc-number">1.</span> <span class="toc-text"> Database workloads</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#oltp"><span class="toc-number">1.1.</span> <span class="toc-text"> OLTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#olap"><span class="toc-number">1.2.</span> <span class="toc-text"> OLAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#htap"><span class="toc-number">1.3.</span> <span class="toc-text"> HTAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stroage-models"><span class="toc-number">2.</span> <span class="toc-text"> Stroage Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#n-ary-storage-model-nsm"><span class="toc-number">2.1.</span> <span class="toc-text"> N-Ary Storage Model (NSM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decompositrion-storage-model-dsm"><span class="toc-number">2.2.</span> <span class="toc-text"> Decompositrion Storage Model (DSM)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#database-compression"><span class="toc-number">3.</span> <span class="toc-text"> Database Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E9%A2%97%E7%B2%92%E5%BA%A6"><span class="toc-number">3.1.</span> <span class="toc-text"> 压缩颗粒度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#naive-compression"><span class="toc-number">4.</span> <span class="toc-text"> Naive Compression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#columnar-compression"><span class="toc-number">5.</span> <span class="toc-text"> Columnar Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#run-length-encodingrle"><span class="toc-number">5.1.</span> <span class="toc-text"> Run-Length Encoding(RLE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bit-packing-encoding"><span class="toc-number">5.2.</span> <span class="toc-text"> Bit-Packing Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bitmap-encoding"><span class="toc-number">5.3.</span> <span class="toc-text"> Bitmap Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delta-encoding"><span class="toc-number">5.4.</span> <span class="toc-text"> Delta Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#incremental-encoding"><span class="toc-number">5.5.</span> <span class="toc-text"> Incremental Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dictionary-compression"><span class="toc-number">5.6.</span> <span class="toc-text"> Dictionary Compression</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Database-workloads"><span class="toc-number">1.</span> <span class="toc-text">Database workloads</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OLTP"><span class="toc-number">1.1.</span> <span class="toc-text">OLTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OLAP"><span class="toc-number">1.2.</span> <span class="toc-text">OLAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTAP"><span class="toc-number">1.3.</span> <span class="toc-text">HTAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stroage-Models"><span class="toc-number">2.</span> <span class="toc-text">Stroage Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#N-Ary-Storage-Model-NSM"><span class="toc-number">2.1.</span> <span class="toc-text">N-Ary Storage Model (NSM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decompositrion-Storage-Model-DSM"><span class="toc-number">2.2.</span> <span class="toc-text">Decompositrion Storage Model (DSM)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database-Compression"><span class="toc-number">3.</span> <span class="toc-text">Database Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E9%A2%97%E7%B2%92%E5%BA%A6"><span class="toc-number">3.1.</span> <span class="toc-text">压缩颗粒度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Naive-Compression"><span class="toc-number">4.</span> <span class="toc-text">Naive Compression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Columnar-Compression"><span class="toc-number">5.</span> <span class="toc-text">Columnar Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-Length-Encoding-RLE"><span class="toc-number">5.1.</span> <span class="toc-text">Run-Length Encoding(RLE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bit-Packing-Encoding"><span class="toc-number">5.2.</span> <span class="toc-text">Bit-Packing Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmap-Encoding"><span class="toc-number">5.3.</span> <span class="toc-text">Bitmap Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delta-Encoding"><span class="toc-number">5.4.</span> <span class="toc-text">Delta Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Incremental-Encoding"><span class="toc-number">5.5.</span> <span class="toc-text">Incremental Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dictionary-Compression"><span class="toc-number">5.6.</span> <span class="toc-text">Dictionary Compression</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -230,24 +230,24 @@ root((Lecture 5))
     Delta Encoding
     Incremental Encoding
     Dictionary Encoding</pre>
-<h2 id="database-workloads"><a class="markdownIt-Anchor" href="#database-workloads"></a> Database workloads</h2>
-<h3 id="oltp"><a class="markdownIt-Anchor" href="#oltp"></a> OLTP</h3>
+<h2 id="Database-workloads">Database workloads</h2>
+<h3 id="OLTP">OLTP</h3>
 <p>OLTP: On-Line Transaction Processing</p>
 <p>每次快速的对一个小范围的数据进行读取、更新的操作。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmWjGBjz9tPJNKJsWvAJHn6S1Y1Zg4bzwUFh4rGbkmr7Nx" alt="OLTP" /></p>
-<h3 id="olap"><a class="markdownIt-Anchor" href="#olap"></a> OLAP</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmWjGBjz9tPJNKJsWvAJHn6S1Y1Zg4bzwUFh4rGbkmr7Nx" alt=""></p>
+<h3 id="OLAP">OLAP</h3>
 <p>OLAP: On-Line Analytical Processing</p>
 <p>OLAP 是用来支持复杂的分析操作，提供决策支持等</p>
-<p><img src="https://cf-ipfs.com/ipfs/Qmcr9z7hT4zstPoYQrLUmicaivD5rt8dRqxARZu7U6DVHF" alt="image" /></p>
-<h3 id="htap"><a class="markdownIt-Anchor" href="#htap"></a> HTAP</h3>
+<p><img src="https://cf-ipfs.com/ipfs/Qmcr9z7hT4zstPoYQrLUmicaivD5rt8dRqxARZu7U6DVHF" alt=""></p>
+<h3 id="HTAP">HTAP</h3>
 <p>Hybrid Transaction + Analytical Processing</p>
 <p>一种新的 workload ，将 OLTP 和 OOLAP 结合起来。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmSaQ4beZHaMzsfsMTe1tFL1ybqRSj7My4684j1kn1coer" alt="OLTP OLAP HTAP" /></p>
-<hr />
-<h2 id="stroage-models"><a class="markdownIt-Anchor" href="#stroage-models"></a> Stroage Models</h2>
-<h3 id="n-ary-storage-model-nsm"><a class="markdownIt-Anchor" href="#n-ary-storage-model-nsm"></a> N-Ary Storage Model (NSM)</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmSaQ4beZHaMzsfsMTe1tFL1ybqRSj7My4684j1kn1coer" alt=""></p>
+<hr>
+<h2 id="Stroage-Models">Stroage Models</h2>
+<h3 id="N-Ary-Storage-Model-NSM">N-Ary Storage Model (NSM)</h3>
 <p>在 <code>n-ary</code> 的存储模式中，DBMS 连续的存储所有的、包含所有 <code>arributes</code> 的 <code>tuple</code> 在一个单独的页面中。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmVYrVctydHbc4A1c5WwD3jczyYA94uhNExZgn6mYfAje8" alt="n-ary-model" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmVYrVctydHbc4A1c5WwD3jczyYA94uhNExZgn6mYfAje8" alt=""></p>
 <p>这对于 OLTP 来说是十分理想的。</p>
 <p>Advantages:</p>
 <ul>
@@ -259,14 +259,14 @@ root((Lecture 5))
 <li>对于需要扫描整个表或者只需要一个属性的查询非常不好</li>
 </ul>
 <blockquote></blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/QmR8EJYooMcLuaGZLMzLeDK92r9svS3mk8ay2VcfTDgJY5" alt="image" /></p>
-<h3 id="decompositrion-storage-model-dsm"><a class="markdownIt-Anchor" href="#decompositrion-storage-model-dsm"></a> Decompositrion Storage Model (DSM)</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmR8EJYooMcLuaGZLMzLeDK92r9svS3mk8ay2VcfTDgJY5" alt=""></p>
+<h3 id="Decompositrion-Storage-Model-DSM">Decompositrion Storage Model (DSM)</h3>
 <p>将所有 <code>tuples</code> 中的每个 <code>attribute</code> 单独分出来进行存储</p>
 <blockquote>
 <p>也可以成为 “列存储 (column store)”</p>
 </blockquote>
 <p>对于只读的 OLAP 操作非常友好，尤其是那些只需要扫描部分 <code>attributes</code> 的操作来说。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmeW3ayCpBjFVx8rJvC4Ld5MQPuKPHT1kDciKLM1fPBeFc" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmeW3ayCpBjFVx8rJvC4Ld5MQPuKPHT1kDciKLM1fPBeFc" alt=""></p>
 <p>Advantages:</p>
 <ul>
 <li>减少 I/O 的浪费</li>
@@ -281,27 +281,27 @@ root((Lecture 5))
 <li>为每个属性设置固定的字长，这样我们只需要得到 <code>offset</code> 就可以准确的查找到我们所需要的数据</li>
 <li>一个更为罕见的操作是，使用一个形如 <code>(id : pos)</code> 的 tuple 来存储值，表示第 <code>id</code> 的值存储在 <code>pos</code> 位置上。</li>
 </ol>
-<p><img src="https://cf-ipfs.com/ipfs/QmRyFvUztSXxLZKPfiEUnYBXsgh9ZfSyWfM8UcbjuM8cW4" alt="image" /></p>
-<h2 id="database-compression"><a class="markdownIt-Anchor" href="#database-compression"></a> Database Compression</h2>
+<p><img src="https://cf-ipfs.com/ipfs/QmRyFvUztSXxLZKPfiEUnYBXsgh9ZfSyWfM8UcbjuM8cW4" alt=""></p>
+<h2 id="Database-Compression">Database Compression</h2>
 <p>I/O 是非常耗时的，通常是整个数据库的瓶颈，所以 DBMS 中广泛的采用压缩算法来提高 DBMS 的表现。</p>
 <p>通常我们需要在 <strong>速度</strong> 和 <strong>压缩率</strong> 之间进行取舍。</p>
-<h3 id="压缩颗粒度"><a class="markdownIt-Anchor" href="#压缩颗粒度"></a> 压缩颗粒度</h3>
+<h3 id="压缩颗粒度">压缩颗粒度</h3>
 <ul>
 <li>Block Level</li>
 <li>Tuple Level 对整个 <code>tuple</code> 进行压缩 (NSM Only)</li>
 <li>Attribute Level</li>
 <li>Columnar Level</li>
 </ul>
-<h2 id="naive-compression"><a class="markdownIt-Anchor" href="#naive-compression"></a> Naive Compression</h2>
+<h2 id="Naive-Compression">Naive Compression</h2>
 <p>使用 “general-purpose” 的压缩算法通常也是一种解决办法。不过一旦使用着这种方法之后，DBMS 就不知道我们进行操作的数据是什么，直到解压完。</p>
-<p>provided as input:<br />
-→ LZO (1996), LZ4 (2011), Snappy (2011),<br />
+<p>provided as input:<br>
+→ LZO (1996), LZ4 (2011), Snappy (2011),<br>
 Oracle OZIP (2014), Zstd (2015)</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmRU9XswYdyhkH7e6G5MhU1oFknSRU934udLUwMhryvpnC" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmRU9XswYdyhkH7e6G5MhU1oFknSRU934udLUwMhryvpnC" alt=""></p>
 <p>为了提高速度，我们需要另外的压缩方法，即使是在压缩之后，我们也有办法获取其中的信息来加速。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmfWREJzu1jZZ1k9WbwDMCJxedBfqz9bdPWc25LWR5b1RE" alt="image" /></p>
-<h2 id="columnar-compression"><a class="markdownIt-Anchor" href="#columnar-compression"></a> Columnar Compression</h2>
-<h3 id="run-length-encodingrle"><a class="markdownIt-Anchor" href="#run-length-encodingrle"></a> Run-Length Encoding(RLE)</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmfWREJzu1jZZ1k9WbwDMCJxedBfqz9bdPWc25LWR5b1RE" alt=""></p>
+<h2 id="Columnar-Compression">Columnar Compression</h2>
+<h3 id="Run-Length-Encoding-RLE">Run-Length Encoding(RLE)</h3>
 <p>可以将一些连续出现在同一列上的值压缩成一个形如<code>(value : pos : num)</code> 的 <code>triplets</code>。</p>
 <p>其中:</p>
 <ol>
@@ -309,37 +309,37 @@ Oracle OZIP (2014), Zstd (2015)</p>
 <li><code>pos</code> 表示该值的起始位置</li>
 <li><code>num</code> 表示该值重复的次数</li>
 </ol>
-<p><img src="https://cf-ipfs.com/ipfs/QmeDPCDfxrA8q7pA3emRu5oX56W6PmUwGyG7V2GcGY6Rhw" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmeDPCDfxrA8q7pA3emRu5oX56W6PmUwGyG7V2GcGY6Rhw" alt=""></p>
 <blockquote>
 <p>不过该方法可能存在一些缺陷</p>
 </blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/QmbNbjXVMavSqu2ct7UQF4MqXBXen6Bu5nAJ6FyqhokcHY" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmbNbjXVMavSqu2ct7UQF4MqXBXen6Bu5nAJ6FyqhokcHY" alt=""></p>
 <blockquote>
 <p>经过转换后</p>
 </blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/Qmc8rLbNFkcyyEgb3WDL78U6BWXmyULhYF1eUhVHBctvub" alt="image" /></p>
-<h3 id="bit-packing-encoding"><a class="markdownIt-Anchor" href="#bit-packing-encoding"></a> Bit-Packing Encoding</h3>
+<p><img src="https://cf-ipfs.com/ipfs/Qmc8rLbNFkcyyEgb3WDL78U6BWXmyULhYF1eUhVHBctvub" alt=""></p>
+<h3 id="Bit-Packing-Encoding">Bit-Packing Encoding</h3>
 <p>一些数据对我们来说是十分冗余的，我们可以通过 Bit-Packing 的方式来减少这些冗余。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmRLifwPj8CVwfxrQqLChyyMKWsAHsqvvJsbLpycA8SrAS" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmRLifwPj8CVwfxrQqLChyyMKWsAHsqvvJsbLpycA8SrAS" alt=""></p>
 <p>将 <code>int64</code> 转换为 <code>int8</code> 大大减少了需要的空间。</p>
 <p>不过该方法存在一些缺陷，可能会存在部分信息有不符合 <code>int8</code> 的信息。</p>
 <p>因此，我们需要如下的方式进行存储。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmbnGQ8AmVdWtJvqwA2zyZyqgwTTQqrugWo8EVmgsANCun" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmbnGQ8AmVdWtJvqwA2zyZyqgwTTQqrugWo8EVmgsANCun" alt=""></p>
 <p>不过该方法只能在额外存储信息较少的时候进行使用。</p>
-<h3 id="bitmap-encoding"><a class="markdownIt-Anchor" href="#bitmap-encoding"></a> Bitmap Encoding</h3>
+<h3 id="Bitmap-Encoding">Bitmap Encoding</h3>
 <p>当我们每个 <code>attribute</code> 较少的时候，我们可以采用 Bitmap 的方式进行存储。</p>
 <p>例如，只存在 <code>F</code> 和 <code>M</code> 两种值的时候，我们就可以是由 <code>01</code> 来表示是或者不是。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmVHXmXPg4af1uc5zZ8PT4S56cjMyXtn7Vux1WqHQRh3Zv" alt="image" /></p>
-<h3 id="delta-encoding"><a class="markdownIt-Anchor" href="#delta-encoding"></a> Delta Encoding</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmVHXmXPg4af1uc5zZ8PT4S56cjMyXtn7Vux1WqHQRh3Zv" alt=""></p>
+<h3 id="Delta-Encoding">Delta Encoding</h3>
 <p>在许多情况下，例如室温多少，我们的统计结果里可能存在较为密集的值在一定的范围内。</p>
 <p>因此我们通过确定一个值后，往后的所有值都可以通过 <code>delta</code> 的形式存储</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmQSzbJGqVgdzv37LYb7wKa2cpWHEyc83bBd45MXKsTCPD" alt="image" /></p>
-<h3 id="incremental-encoding"><a class="markdownIt-Anchor" href="#incremental-encoding"></a> Incremental Encoding</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmQSzbJGqVgdzv37LYb7wKa2cpWHEyc83bBd45MXKsTCPD" alt=""></p>
+<h3 id="Incremental-Encoding">Incremental Encoding</h3>
 <p>我们通常也可以通过取 <strong>前缀 / 后缀</strong> 的形式来得到我们的最终结果。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmU21hsowqjLrA3RpLyaxDvYanP6of77ZcnsTnmxJ48GsM" alt="image" /></p>
-<h3 id="dictionary-compression"><a class="markdownIt-Anchor" href="#dictionary-compression"></a> Dictionary Compression</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmU21hsowqjLrA3RpLyaxDvYanP6of77ZcnsTnmxJ48GsM" alt=""></p>
+<h3 id="Dictionary-Compression">Dictionary Compression</h3>
 <p>当一张表中可能存在多个值，且这多个值存在在不同的地方，那么我们就可以通过字典的形式得到这些值所在的位置。</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmaTr6bHJnc5GA4rCQkKxPqNvN9nzmtbzMRTsLhg863wEd" alt="image" /></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmaTr6bHJnc5GA4rCQkKxPqNvN9nzmtbzMRTsLhg863wEd" alt=""></p>
 <p>这也是最常用的压缩方法。</p>
 
   </div>
@@ -381,23 +381,23 @@ Oracle OZIP (2014), Zstd (2015)</p>
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#database-workloads"><span class="toc-number">1.</span> <span class="toc-text"> Database workloads</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#oltp"><span class="toc-number">1.1.</span> <span class="toc-text"> OLTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#olap"><span class="toc-number">1.2.</span> <span class="toc-text"> OLAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#htap"><span class="toc-number">1.3.</span> <span class="toc-text"> HTAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stroage-models"><span class="toc-number">2.</span> <span class="toc-text"> Stroage Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#n-ary-storage-model-nsm"><span class="toc-number">2.1.</span> <span class="toc-text"> N-Ary Storage Model (NSM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decompositrion-storage-model-dsm"><span class="toc-number">2.2.</span> <span class="toc-text"> Decompositrion Storage Model (DSM)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#database-compression"><span class="toc-number">3.</span> <span class="toc-text"> Database Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E9%A2%97%E7%B2%92%E5%BA%A6"><span class="toc-number">3.1.</span> <span class="toc-text"> 压缩颗粒度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#naive-compression"><span class="toc-number">4.</span> <span class="toc-text"> Naive Compression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#columnar-compression"><span class="toc-number">5.</span> <span class="toc-text"> Columnar Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#run-length-encodingrle"><span class="toc-number">5.1.</span> <span class="toc-text"> Run-Length Encoding(RLE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bit-packing-encoding"><span class="toc-number">5.2.</span> <span class="toc-text"> Bit-Packing Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bitmap-encoding"><span class="toc-number">5.3.</span> <span class="toc-text"> Bitmap Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delta-encoding"><span class="toc-number">5.4.</span> <span class="toc-text"> Delta Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#incremental-encoding"><span class="toc-number">5.5.</span> <span class="toc-text"> Incremental Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dictionary-compression"><span class="toc-number">5.6.</span> <span class="toc-text"> Dictionary Compression</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Database-workloads"><span class="toc-number">1.</span> <span class="toc-text">Database workloads</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OLTP"><span class="toc-number">1.1.</span> <span class="toc-text">OLTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OLAP"><span class="toc-number">1.2.</span> <span class="toc-text">OLAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTAP"><span class="toc-number">1.3.</span> <span class="toc-text">HTAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stroage-Models"><span class="toc-number">2.</span> <span class="toc-text">Stroage Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#N-Ary-Storage-Model-NSM"><span class="toc-number">2.1.</span> <span class="toc-text">N-Ary Storage Model (NSM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decompositrion-Storage-Model-DSM"><span class="toc-number">2.2.</span> <span class="toc-text">Decompositrion Storage Model (DSM)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database-Compression"><span class="toc-number">3.</span> <span class="toc-text">Database Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E9%A2%97%E7%B2%92%E5%BA%A6"><span class="toc-number">3.1.</span> <span class="toc-text">压缩颗粒度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Naive-Compression"><span class="toc-number">4.</span> <span class="toc-text">Naive Compression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Columnar-Compression"><span class="toc-number">5.</span> <span class="toc-text">Columnar Compression</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-Length-Encoding-RLE"><span class="toc-number">5.1.</span> <span class="toc-text">Run-Length Encoding(RLE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bit-Packing-Encoding"><span class="toc-number">5.2.</span> <span class="toc-text">Bit-Packing Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmap-Encoding"><span class="toc-number">5.3.</span> <span class="toc-text">Bitmap Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delta-Encoding"><span class="toc-number">5.4.</span> <span class="toc-text">Delta Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Incremental-Encoding"><span class="toc-number">5.5.</span> <span class="toc-text">Incremental Encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dictionary-Compression"><span class="toc-number">5.6.</span> <span class="toc-text">Dictionary Compression</span></a></li></ol></li></ol>
       </div>
     
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&text=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&is_video=false&description=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Lecture #05: Storage Models &amp; Compression&body=Check out this article: http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&name=Lecture #05: Storage Models &amp; Compression&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/&t=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&text=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&is_video=false&description=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lecture #05: Storage Models &amp; Compression&body=Check out this article: http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&title=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&name=Lecture #05: Storage Models &amp; Compression&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/&t=Lecture #05: Storage Models &amp; Compression"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

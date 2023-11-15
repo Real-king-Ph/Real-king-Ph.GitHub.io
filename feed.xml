@@ -18,8 +18,8 @@
   
   <entry>
     <title>Lecture #06: Memory Management</title>
-    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-Lecture-6-Memory-Management/"/>
-    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-Lecture-6-Memory-Management/</id>
+    <link href="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-23-Lecture-6-Memory-Management/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-23-Lecture-6-Memory-Management/</id>
     <published>2023-11-13T05:42:36.905Z</published>
     <updated>2023-11-15T07:15:17.459Z</updated>
     
@@ -45,8 +45,8 @@
   
   <entry>
     <title>《上个世纪的学校》 书摘</title>
-    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"/>
-    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/</id>
+    <link href="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/</id>
     <published>2023-11-13T05:42:36.905Z</published>
     <updated>2023-11-15T07:15:36.897Z</updated>
     
@@ -56,7 +56,7 @@
         
         
     <summary type="html">&lt;p&gt;书源 《昨日的世界》 茨威格 ,  数百年前的「现代」「教育」，「军事化」的教育&lt;/p&gt;
-&lt;h2 id=&quot;pt1-填鸭式-流水线化的教育&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pt1-填鸭式-流水线化的教育&quot;&gt;&lt;/a&gt; Pt.1</summary>
+&lt;h2 id=&quot;Pt-1-填鸭式、流水线化的教育&quot;&gt;Pt.1</summary>
         
       
     
@@ -69,8 +69,8 @@
   
   <entry>
     <title>清泉之心</title>
-    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-15-heart-of-Clean-Springs/"/>
-    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-15-heart-of-Clean-Springs/</id>
+    <link href="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-15-heart-of-Clean-Springs/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-15-heart-of-Clean-Springs/</id>
     <published>2023-11-13T05:42:36.904Z</published>
     <updated>2023-11-15T07:15:57.444Z</updated>
     
@@ -79,8 +79,8 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;剧情pv&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#剧情pv&quot;&gt;&lt;/a&gt; 剧情PV&lt;/h2&gt;
-&lt;iframe width=&quot;854&quot; height=&quot;480&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;剧情PV&quot;&gt;剧情PV&lt;/h2&gt;
+&lt;iframe width=&quot;854&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/bdduDpNxknE&quot; title=&quot;《原神》剧情PV-「清泉之心」&quot;</summary>
         
       
     
@@ -93,8 +93,8 @@
   
   <entry>
     <title>Lecture #05: Storage Models &amp; Compression</title>
-    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"/>
-    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/</id>
+    <link href="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/</id>
     <published>2023-11-13T05:42:36.904Z</published>
     <updated>2023-11-15T07:15:59.050Z</updated>
     
@@ -121,8 +121,8 @@
   
   <entry>
     <title>CMU15445 Project 0 Trie_Tree</title>
-    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-09-27-CMU15445-project-0/"/>
-    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-09-27-CMU15445-project-0/</id>
+    <link href="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-09-27-CMU15445-project-0/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/23Y-Q4-09-27-CMU15445-project-0/</id>
     <published>2023-11-13T05:42:36.903Z</published>
     <updated>2023-11-15T07:16:18.044Z</updated>
     
@@ -131,8 +131,9 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;实验目标&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#实验目标&quot;&gt;&lt;/a&gt; 实验目标&lt;/h2&gt;
-&lt;p&gt;该实验为 &lt;code&gt;CMU 15-445/645&lt;/code&gt; 的前置实现。主要考察 C++</summary>
+    <summary type="html">&lt;h2 id=&quot;实验目标&quot;&gt;实验目标&lt;/h2&gt;
+&lt;p&gt;该实验为 &lt;code&gt;CMU 15-445/645&lt;/code&gt; 的前置实现。主要考察 C++ 使用的功底。&lt;/p&gt;
+&lt;p&gt;我所采用的课程为 &lt;a</summary>
         
       
     
