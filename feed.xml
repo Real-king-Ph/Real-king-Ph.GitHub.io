@@ -6,7 +6,7 @@
   <link href="http://blog.ohtoai.fun/feed.xml" rel="self"/>
   
   <link href="http://blog.ohtoai.fun/"/>
-  <updated>2023-11-13T05:42:36.906Z</updated>
+  <updated>2023-11-15T07:15:17.459Z</updated>
   <id>http://blog.ohtoai.fun/</id>
   
   <author>
@@ -17,35 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>《上个世纪的学校》 书摘</title>
-    <link href="http://blog.ohtoai.fun/2023/10/23/2023-09-12-2023-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"/>
-    <id>http://blog.ohtoai.fun/2023/10/23/2023-09-12-2023-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/</id>
-    <published>2023-10-23T14:02:57.000Z</published>
-    <updated>2023-11-13T05:42:36.906Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;书源 《昨日的世界》 茨威格 ,  数百年前的「现代」「教育」，「军事化」的教育&lt;/p&gt;
-&lt;h2 id=&quot;pt1-填鸭式-流水线化的教育&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pt1-填鸭式-流水线化的教育&quot;&gt;&lt;/a&gt; Pt.1</summary>
-        
-      
-    
-    
-    
-    
-    <category term="散文" scheme="http://blog.ohtoai.fun/tags/%E6%95%A3%E6%96%87/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Lecture #06: Memory Management</title>
-    <link href="http://blog.ohtoai.fun/2023/10/23/2023-09-12-2023-10-23-Lecture-6-Memory-Management/"/>
-    <id>http://blog.ohtoai.fun/2023/10/23/2023-09-12-2023-10-23-Lecture-6-Memory-Management/</id>
-    <published>2023-10-23T03:10:55.000Z</published>
-    <updated>2023-11-14T07:02:19.514Z</updated>
+    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-Lecture-6-Memory-Management/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-Lecture-6-Memory-Management/</id>
+    <published>2023-11-13T05:42:36.905Z</published>
+    <updated>2023-11-15T07:15:17.459Z</updated>
     
     
       
@@ -68,11 +44,59 @@
   </entry>
   
   <entry>
+    <title>《上个世纪的学校》 书摘</title>
+    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/</id>
+    <published>2023-11-13T05:42:36.905Z</published>
+    <updated>2023-11-15T07:15:36.897Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;书源 《昨日的世界》 茨威格 ,  数百年前的「现代」「教育」，「军事化」的教育&lt;/p&gt;
+&lt;h2 id=&quot;pt1-填鸭式-流水线化的教育&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pt1-填鸭式-流水线化的教育&quot;&gt;&lt;/a&gt; Pt.1</summary>
+        
+      
+    
+    
+    
+    
+    <category term="散文" scheme="http://blog.ohtoai.fun/tags/%E6%95%A3%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>清泉之心</title>
+    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-15-heart-of-Clean-Springs/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-15-heart-of-Clean-Springs/</id>
+    <published>2023-11-13T05:42:36.904Z</published>
+    <updated>2023-11-15T07:15:57.444Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;剧情pv&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#剧情pv&quot;&gt;&lt;/a&gt; 剧情PV&lt;/h2&gt;
+&lt;iframe width=&quot;854&quot; height=&quot;480&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="game" scheme="http://blog.ohtoai.fun/tags/game/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lecture #05: Storage Models &amp; Compression</title>
-    <link href="http://blog.ohtoai.fun/2023/10/19/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"/>
-    <id>http://blog.ohtoai.fun/2023/10/19/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/</id>
-    <published>2023-10-19T05:42:33.000Z</published>
-    <updated>2023-11-14T07:02:19.513Z</updated>
+    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-10-19-Lecture-5-Storage-Models-Compression/</id>
+    <published>2023-11-13T05:42:36.904Z</published>
+    <updated>2023-11-15T07:15:59.050Z</updated>
     
     
       
@@ -96,35 +120,11 @@
   </entry>
   
   <entry>
-    <title>清泉之心</title>
-    <link href="http://blog.ohtoai.fun/2023/10/15/2023-09-12-2023-10-15-heart-of-Clean-Springs/"/>
-    <id>http://blog.ohtoai.fun/2023/10/15/2023-09-12-2023-10-15-heart-of-Clean-Springs/</id>
-    <published>2023-10-15T05:12:29.000Z</published>
-    <updated>2023-11-13T05:42:36.904Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;剧情pv&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#剧情pv&quot;&gt;&lt;/a&gt; 剧情PV&lt;/h2&gt;
-&lt;iframe width=&quot;854&quot; height=&quot;480&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="game" scheme="http://blog.ohtoai.fun/tags/game/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CMU15445 Project 0 Trie_Tree</title>
-    <link href="http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/"/>
-    <id>http://blog.ohtoai.fun/2023/09/27/2023-09-12-2023-09-27-CMU15445-project-0/</id>
-    <published>2023-09-27T06:44:40.000Z</published>
-    <updated>2023-11-13T05:42:36.904Z</updated>
+    <link href="http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-09-27-CMU15445-project-0/"/>
+    <id>http://blog.ohtoai.fun/2023/11/13/2023-09-12-2023-09-27-CMU15445-project-0/</id>
+    <published>2023-11-13T05:42:36.903Z</published>
+    <updated>2023-11-15T07:16:18.044Z</updated>
     
     
       
