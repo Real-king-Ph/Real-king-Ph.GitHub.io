@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[^cmu_15445_fall2022] 相关代码可以在 Release[^bustub_source_code] 中下载 [^cmu_15445_fall2022]: CMU 15-445&#x2F;645 fall2022 官方网址 https:&#x2F;&#x2F;15445.courses">
+    <meta name="description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容  如何搭建环境 C++的使用  classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNode &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CMU15445 Project 0 Trie_Tree">
 <meta property="og:url" content="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-09-27-CMU15445-project-0/">
 <meta property="og:site_name" content="RK&#39;s blog">
-<meta property="og:description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[^cmu_15445_fall2022] 相关代码可以在 Release[^bustub_source_code] 中下载 [^cmu_15445_fall2022]: CMU 15-445&#x2F;645 fall2022 官方网址 https:&#x2F;&#x2F;15445.courses">
+<meta property="og:description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容  如何搭建环境 C++的使用  classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNode &amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png">
@@ -149,7 +149,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Debug"><span class="toc-number">2.1.</span> <span class="toc-text">Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">C++ 的使用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text"> 实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text"> 环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug"><span class="toc-number">2.1.</span> <span class="toc-text"> Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text"> C++ 的使用</span></a></li></ol>
       </div>
     
   </span>
@@ -199,11 +199,9 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="实验目标">实验目标</h2>
+    <h2 id="实验目标"><a class="markdownIt-Anchor" href="#实验目标"></a> 实验目标</h2>
 <p>该实验为 <code>CMU 15-445/645</code> 的前置实现。主要考察 C++ 使用的功底。</p>
-<p>我所采用的课程为 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">fall2022</a>[^cmu_15445_fall2022] 相关代码可以在 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">Release</a>[^bustub_source_code] 中下载</p>
-<p>[^cmu_15445_fall2022]: CMU 15-445/645 fall2022 官方网址 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a><br>
-[^bustub_source_code]: bustub 源码地址 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub">https://github.com/cmu-db/bustub</a></p>
+<p>我所采用的课程为 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">fall2022</a><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 相关代码可以在 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub/releases/tag/v20221128-2022fall">Release</a><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 中下载</p>
 <p>该课程主要涉及到两方面内容</p>
 <ul>
 <li>如何搭建环境</li>
@@ -243,7 +241,7 @@ class Trie {
  + Remove(const std::string &key,) bool
  + GetValue(const std::string &key, bool success) T
 }</pre>
-<h2 id="环境的搭建">环境的搭建</h2>
+<h2 id="环境的搭建"><a class="markdownIt-Anchor" href="#环境的搭建"></a> 环境的搭建</h2>
 <p>我采用的是使用虚拟机(Ubuntu) + 本地电脑ssh 的开发方式。</p>
 <p>vscode 中安装如下几个插件</p>
 <ul>
@@ -262,23 +260,23 @@ class Trie {
 ![VSCODE](https://s2.loli.net/2023/10/01/1zx8TOX9fcWYEF2.png)
 <p>我们点击最下方的</p>
 <p><a href="#tmp_tag"><i class="fa-solid fa-gear fa-beat"></i> 生成</a></p>
-<p><img src="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png" alt=""></p>
+<p><img src="https://s2.loli.net/2023/10/01/RcEXkCSA9uOsj1I.png" alt="image-20231001205625799" /></p>
 <p>然后选择 <code>Clang 12.01 x86_64-pc-linux-gnu</code> 即可愉快的coding了。</p>
-<h3 id="Debug">Debug</h3>
+<h3 id="debug"><a class="markdownIt-Anchor" href="#debug"></a> Debug</h3>
 <p>在 <i class="fa-solid fa-gear fa-beat"></i> 生成旁边有个按钮 <code>[all]</code> 把他切换为你所需要的那个就可以了。</p>
-<p><img src="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png" alt=""></p>
+<p><img src="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png" alt="" /></p>
 <p>所采用的测试方法为 <code>GTest</code></p>
 <p>只需要将目标 Test 文件下的 <code>DIABLE_</code> 删除就可以进行 Test 了</p>
 <p>例如在路径 <code>/test/primer/starter_trie_test.cpp</code> 将所有 <code>DIABLE_</code> 删除，之后就可以尝试输出结果，按 <i class="fa-solid fa-bug"></i> 就可以在自己打的断点进行调试。按 <i class="fa-solid fa-play"></i> 就可以直接出结果</p>
 <blockquote>
-<p><i class="fa-solid fa-bug"></i> 调试<br>
-<img src="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png" alt=""></p>
+<p><i class="fa-solid fa-bug"></i> 调试<br />
+<img src="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png" alt="Debug &quot;你正在调试&quot;" /></p>
 </blockquote>
 <blockquote>
-<p><i class="fa-solid fa-play"></i> 运行结果<br>
-<img src="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png" alt=""></p>
+<p><i class="fa-solid fa-play"></i> 运行结果<br />
+<img src="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png" alt="Run &quot;运行代码的结果&quot;" /></p>
 </blockquote>
-<h2 id="C-的使用">C++ 的使用</h2>
+<h2 id="c-的使用"><a class="markdownIt-Anchor" href="#c-的使用"></a> C++ 的使用</h2>
 <p>这方面到没有太多可以讲的。</p>
 <p>主要抓住 <code>std::unique_ptr</code> 的用法就可以了。</p>
 <p>下面是几个个使用的例子。</p>
@@ -289,6 +287,15 @@ class Trie {
 <p>通过强制转换得到子类空间的值</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> tmp_node = <span class="keyword">dynamic_cast</span>&lt;TrieNodeWithValue&lt;T&gt; *&gt;(cur_node-&gt;<span class="built_in">get</span>());</span><br></pre></td></tr></table></figure>
 <p>由于课程已经结束了，实在无法完成的话，可以参考我的<a href="/assets/others/CMU15445_project_0_c++_prime.cpp">代码</a>。</p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>CMU 15-445/645 fall2022 官方网址 <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>bustub 源码地址 <a target="_blank" rel="noopener" href="https://github.com/cmu-db/bustub">https://github.com/cmu-db/bustub</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 
   </div>
 </article>
@@ -329,7 +336,7 @@ class Trie {
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Debug"><span class="toc-number">2.1.</span> <span class="toc-text">Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">C++ 的使用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text"> 实验目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text"> 环境的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug"><span class="toc-number">2.1.</span> <span class="toc-text"> Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text"> C++ 的使用</span></a></li></ol>
       </div>
     
 
@@ -474,6 +481,10 @@ class Trie {
 }
 body {
   --waline-box-shadow: 0 12px 40px #0f0e0d;
+}
+
+.wl-content .vemoji, .wl-content .wl-emoji {
+    height: 6.25em;
 }
 
 </style>

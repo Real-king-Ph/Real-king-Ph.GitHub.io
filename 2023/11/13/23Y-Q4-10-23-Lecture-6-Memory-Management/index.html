@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="TODO: https:&#x2F;&#x2F;youtu.be&#x2F;Y9H2HaRKOIw?list&#x3D;PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;t&#x3D;1141 1. Introduction 如何存储：  我们的 pages 要存储在 disk 上的什么样的地方  快速操作：  对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行">
+    <meta name="description" content="TODO: https:&#x2F;&#x2F;youtu.be&#x2F;Y9H2HaRKOIw?list&#x3D;PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;t&#x3D;1141  1. Introduction 如何存储：  我们的 pages 要存储在 disk 上的什么样的地方  快速操作：  对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture #06: Memory Management">
 <meta property="og:url" content="http://blog.ohtoai.fun/2023/11/13/23Y-Q4-10-23-Lecture-6-Memory-Management/">
 <meta property="og:site_name" content="RK&#39;s blog">
-<meta property="og:description" content="TODO: https:&#x2F;&#x2F;youtu.be&#x2F;Y9H2HaRKOIw?list&#x3D;PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;t&#x3D;1141 1. Introduction 如何存储：  我们的 pages 要存储在 disk 上的什么样的地方  快速操作：  对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行">
+<meta property="og:description" content="TODO: https:&#x2F;&#x2F;youtu.be&#x2F;Y9H2HaRKOIw?list&#x3D;PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;t&#x3D;1141  1. Introduction 如何存储：  我们的 pages 要存储在 disk 上的什么样的地方  快速操作：  对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cf-ipfs.com/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq">
 <meta property="og:image" content="https://cf-ipfs.com/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS">
@@ -148,7 +148,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">3.2.</span> <span class="toc-text">Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Buffer-Pool-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">4.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing-Synchornized-Scans"><span class="toc-number">4.3.</span> <span class="toc-text">Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">4.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-OS-Page-Cache"><span class="toc-number">5.</span> <span class="toc-text">5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Buffer-Replacement-Policies"><span class="toc-number">6.</span> <span class="toc-text">6. Buffer Replacement Policies</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-introduction"><span class="toc-number">1.</span> <span class="toc-text"> 1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-locks-vs-latches"><span class="toc-number">2.</span> <span class="toc-text"> 2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-buffer-pool"><span class="toc-number">3.</span> <span class="toc-text"> 3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#buffer-pool-meta-data"><span class="toc-number">3.1.</span> <span class="toc-text"> Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memory-allocation-policies"><span class="toc-number">3.2.</span> <span class="toc-text"> Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-buffer-pool-optimizations"><span class="toc-number">4.</span> <span class="toc-text"> 4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multiple-buffer-pools"><span class="toc-number">4.1.</span> <span class="toc-text"> Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text"> Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scan-sharingsynchornized-scans"><span class="toc-number">4.3.</span> <span class="toc-text"> Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#buffer-pool-bypass"><span class="toc-number">4.4.</span> <span class="toc-text"> Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-os-page-cache"><span class="toc-number">5.</span> <span class="toc-text"> 5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-buffer-replacement-policies"><span class="toc-number">6.</span> <span class="toc-text"> 6. Buffer Replacement Policies</span></a></li></ol>
       </div>
     
   </span>
@@ -199,29 +199,29 @@
 
   <div class="content e-content" itemprop="articleBody">
     <p>TODO: <a target="_blank" rel="noopener" href="https://youtu.be/Y9H2HaRKOIw?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;t=1141">https://youtu.be/Y9H2HaRKOIw?list=PLSE8ODhjZXjaKScG3l0nuOiDTTqpfnWFf&amp;t=1141</a></p>
-<h2 id="1-Introduction">1. Introduction</h2>
+<h2 id="1-introduction"><a class="markdownIt-Anchor" href="#1-introduction"></a> 1. Introduction</h2>
 <p>如何存储：</p>
 <ul>
 <li>我们的 pages 要存储在 disk 上的什么样的地方</li>
 </ul>
 <p>快速操作：</p>
 <ul>
-<li>对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。<br>
-<img src="https://cf-ipfs.com/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq" alt=""></li>
+<li>对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。<br />
+<img src="https://cf-ipfs.com/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq" alt="image" /></li>
 </ul>
-<p><img src="https://cf-ipfs.com/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS" alt=""></p>
-<hr>
-<h2 id="2-Locks-vs-Latches">2. Locks vs. Latches</h2>
-<p><img src="https://cf-ipfs.com/ipfs/Qmd4Ru91wEckAkCukc6gooxtsF5uid8wTkFNTRDsUz1MdD" alt=""></p>
-<hr>
-<h2 id="3-Buffer-Pool">3. Buffer Pool</h2>
+<p><img src="https://cf-ipfs.com/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS" alt="image" /></p>
+<hr />
+<h2 id="2-locks-vs-latches"><a class="markdownIt-Anchor" href="#2-locks-vs-latches"></a> 2. Locks vs. Latches</h2>
+<p><img src="https://cf-ipfs.com/ipfs/Qmd4Ru91wEckAkCukc6gooxtsF5uid8wTkFNTRDsUz1MdD" alt="image" /></p>
+<hr />
+<h2 id="3-buffer-pool"><a class="markdownIt-Anchor" href="#3-buffer-pool"></a> 3. Buffer Pool</h2>
 <p>Memory 中存储的是一个个固定大小的 pages。</p>
 <p>其中的每一个记录称之为 <em>frame</em></p>
 <p>当我们需要一个 page 的时候，我们会立刻复制一个 frame。</p>
 <p>Dirty pages 不会立刻写回。(Write-Back Cache)</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmZcfwGcz4kqLbfRsiMFjp7d2c9UVK7RvrxfyoEHuNAezh" alt=""></p>
-<h3 id="Buffer-Pool-Meta-data">Buffer Pool Meta-data</h3>
-<p><img src="https://cf-ipfs.com/ipfs/QmeudvGi34M1W8gBkn6meRA8vFCWSnYqpcfWgrqAu4GXzT" alt=""></p>
+<p><img src="https://cf-ipfs.com/ipfs/QmZcfwGcz4kqLbfRsiMFjp7d2c9UVK7RvrxfyoEHuNAezh" alt="image" /></p>
+<h3 id="buffer-pool-meta-data"><a class="markdownIt-Anchor" href="#buffer-pool-meta-data"></a> Buffer Pool Meta-data</h3>
+<p><img src="https://cf-ipfs.com/ipfs/QmeudvGi34M1W8gBkn6meRA8vFCWSnYqpcfWgrqAu4GXzT" alt="image" /></p>
 <p><em>page table</em> 是用来跟踪哪些 pages 在 memory 中。</p>
 <p>通常还有一些信息也会被保存在 page table 中</p>
 <ul>
@@ -234,22 +234,21 @@
 <p><strong>page directory</strong> 是一个将 page id 映射到 page location 的一个映射。所有信息必须存放在 disk 上，以便 DBMS 可以找到</p>
 <p><strong>page table</strong> 是一个将 page id 映射到 buffer pool 中的帧上的映射。这是一个 in-memory 的数据结构不需要存储在 disk 上。</p>
 </blockquote>
-<h3 id="Memory-Allocation-Policies">Memory Allocation Policies</h3>
-<hr>
-<h2 id="4-Buffer-Pool-Optimizations">4. Buffer Pool Optimizations</h2>
-<h3 id="Multiple-Buffer-Pools">Multiple Buffer Pools</h3>
-<h3 id="Pre-fetching">Pre-fetching</h3>
-<h3 id="Scan-Sharing-Synchornized-Scans">Scan Sharing(Synchornized Scans)</h3>
-<h3 id="Buffer-Pool-Bypass">Buffer Pool Bypass</h3>
-<hr>
-<h2 id="5-OS-Page-Cache">5. OS Page Cache</h2>
-<hr>
-<h2 id="6-Buffer-Replacement-Policies">6. Buffer Replacement Policies</h2>
-<hr>
+<h3 id="memory-allocation-policies"><a class="markdownIt-Anchor" href="#memory-allocation-policies"></a> Memory Allocation Policies</h3>
+<hr />
+<h2 id="4-buffer-pool-optimizations"><a class="markdownIt-Anchor" href="#4-buffer-pool-optimizations"></a> 4. Buffer Pool Optimizations</h2>
+<h3 id="multiple-buffer-pools"><a class="markdownIt-Anchor" href="#multiple-buffer-pools"></a> Multiple Buffer Pools</h3>
+<h3 id="pre-fetching"><a class="markdownIt-Anchor" href="#pre-fetching"></a> Pre-fetching</h3>
+<h3 id="scan-sharingsynchornized-scans"><a class="markdownIt-Anchor" href="#scan-sharingsynchornized-scans"></a> Scan Sharing(Synchornized Scans)</h3>
+<h3 id="buffer-pool-bypass"><a class="markdownIt-Anchor" href="#buffer-pool-bypass"></a> Buffer Pool Bypass</h3>
+<hr />
+<h2 id="5-os-page-cache"><a class="markdownIt-Anchor" href="#5-os-page-cache"></a> 5. OS Page Cache</h2>
+<hr />
+<h2 id="6-buffer-replacement-policies"><a class="markdownIt-Anchor" href="#6-buffer-replacement-policies"></a> 6. Buffer Replacement Policies</h2>
+<hr />
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;HELLO WORLD&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>$$<br>
-\LaTeX{}<br>
-$$</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>LaTeX</mtext><mrow></mrow></mrow><annotation encoding="application/x-tex">\LaTeX{}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord"><span class="mord textrm mtight sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span><span class="mord"></span></span></span></span></span></p>
 
   </div>
 </article>
@@ -290,7 +289,7 @@ $$</p>
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">3.2.</span> <span class="toc-text">Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Buffer-Pool-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">4.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing-Synchornized-Scans"><span class="toc-number">4.3.</span> <span class="toc-text">Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">4.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-OS-Page-Cache"><span class="toc-number">5.</span> <span class="toc-text">5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Buffer-Replacement-Policies"><span class="toc-number">6.</span> <span class="toc-text">6. Buffer Replacement Policies</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-introduction"><span class="toc-number">1.</span> <span class="toc-text"> 1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-locks-vs-latches"><span class="toc-number">2.</span> <span class="toc-text"> 2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-buffer-pool"><span class="toc-number">3.</span> <span class="toc-text"> 3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#buffer-pool-meta-data"><span class="toc-number">3.1.</span> <span class="toc-text"> Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memory-allocation-policies"><span class="toc-number">3.2.</span> <span class="toc-text"> Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-buffer-pool-optimizations"><span class="toc-number">4.</span> <span class="toc-text"> 4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multiple-buffer-pools"><span class="toc-number">4.1.</span> <span class="toc-text"> Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text"> Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scan-sharingsynchornized-scans"><span class="toc-number">4.3.</span> <span class="toc-text"> Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#buffer-pool-bypass"><span class="toc-number">4.4.</span> <span class="toc-text"> Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-os-page-cache"><span class="toc-number">5.</span> <span class="toc-text"> 5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-buffer-replacement-policies"><span class="toc-number">6.</span> <span class="toc-text"> 6. Buffer Replacement Policies</span></a></li></ol>
       </div>
     
 
@@ -435,6 +434,10 @@ $$</p>
 }
 body {
   --waline-box-shadow: 0 12px 40px #0f0e0d;
+}
+
+.wl-content .vemoji, .wl-content .wl-emoji {
+    height: 6.25em;
 }
 
 </style>
