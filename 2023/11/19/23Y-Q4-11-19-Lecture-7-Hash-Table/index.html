@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="refer to Note refer to Slides refet to courses   1. Data Structure DBMS 主要包括以下几种数据   Internal Meta-Data : 记录有关数据库和系统的信息   Core Data Storage : 记录 tuple 的信息   Temporary Data Structures   Table Indices">
+<meta property="og:type" content="article">
+<meta property="og:title" content="	Lecture #07: Hash Tables">
+<meta property="og:url" content="http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/">
+<meta property="og:site_name" content="RK&#39;s blog">
+<meta property="og:description" content="refer to Note refer to Slides refet to courses   1. Data Structure DBMS 主要包括以下几种数据   Internal Meta-Data : 记录有关数据库和系统的信息   Core Data Storage : 记录 tuple 的信息   Temporary Data Structures   Table Indices">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmQa6j1YLf7asoGhZVGnHVsEeCq3ieVXENzbHPhRqi9nPi">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmPLrgbKARDLJYZ7uHbat3H6eVfds7wpEWSGNJ5u8icjRs">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmTS14yPDLeGj28rz24AUXH68vmeunxLJfamF94xiqqusd">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmcgN4smq3GKho1E6jm2Z2yWvcwBR5GTuXV1Q6bBohCNJt">
+<meta property="og:image" content="https://ipfs.io/ipfs/Qmbko8F5hZKV5NxAZJMbfmcc3jv26iBH9uvYVoxeFRTmeS">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmfB5t64wEpnMpyUKB8RKSeMjmmnkxs4uhEyLGrqC9ZcKA">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmVamwFnGeAMucAgSzyYbjn6AifDRv5utYpsm7A2ZhgGRN">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmNP81bLcQQmhPKKGK5dLqUsffYXTJjs7RjYmtnL9MYE8b">
+<meta property="article:published_time" content="2023-11-19T11:41:33.000Z">
+<meta property="article:modified_time" content="2023-11-20T12:22:37.000Z">
+<meta property="article:author" content="ph">
+<meta property="article:tag" content="CMU15-445">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ipfs.io/ipfs/QmQa6j1YLf7asoGhZVGnHVsEeCq3ieVXENzbHPhRqi9nPi">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>	Lecture #07: Hash Tables</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="RK&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+  <!-- memraid -->
+  
+    <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        var mermaidOptions = {"theme":"neutral"};
+        mermaid.initialize(mermaidOptions);
+      }
+    </script>
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr" >
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/links/">友链</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/15/23Y-Q4-10-23-Lecture-6-Memory-Management/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&text=	Lecture #07: Hash Tables"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&is_video=false&description=	Lecture #07: Hash Tables"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=	Lecture #07: Hash Tables&body=Check out this article: http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&name=	Lecture #07: Hash Tables&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&t=	Lecture #07: Hash Tables"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Data-Structure"><span class="toc-number">1.</span> <span class="toc-text">1. Data Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Hash-Table"><span class="toc-number">2.</span> <span class="toc-text">2. Hash Table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Hash-Function"><span class="toc-number">3.</span> <span class="toc-text">3. Hash Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Static-Hashing-Schemes"><span class="toc-number">4.</span> <span class="toc-text">4. Static Hashing Schemes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Linear-Probe-Hashing"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Linear Probe Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Robin-Hood-Hashing"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 Robin Hood Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Cuckoo-Hashing"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 Cuckoo Hashing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Dynamic-Hashing-Schemes"><span class="toc-number">5.</span> <span class="toc-text">5 Dynamic Hashing Schemes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Chained-Hashing"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 Chained Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-Extendible-Hashing"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 Extendible Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-Linear-Hashing"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 Linear Hashing</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        	Lecture #07: Hash Tables
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ph</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-19T11:41:33.000Z" class="dt-published" itemprop="datePublished">2023-11-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CMU15-445/">CMU15-445</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CMU15-445/" rel="tag">CMU15-445</a>, <a class="p-category" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/notes/07-hashtables.pdf">refer to Note</a></p>
+<p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/slides/07-hashtables.pdf">refer to Slides</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=9yUlSabzVwQ">refet to courses</a></p>
+<p><img src="https://ipfs.io/ipfs/QmQa6j1YLf7asoGhZVGnHVsEeCq3ieVXENzbHPhRqi9nPi" alt="cover"></p>
+<hr>
+<h2 id="1-Data-Structure">1. Data Structure</h2>
+<p>DBMS 主要包括以下几种数据</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Internal Meta-Data : 记录有关数据库和系统的信息</p>
+</li>
+<li class="lvl-2">
+<p>Core Data Storage : 记录 tuple 的信息</p>
+</li>
+<li class="lvl-2">
+<p>Temporary Data Structures</p>
+</li>
+<li class="lvl-2">
+<p>Table Indices</p>
+</li>
+</ul>
+<p>主要考虑以下两个问题</p>
+<ol>
+<li class="lvl-3">
+<p>数据组织</p>
+</li>
+<li class="lvl-3">
+<p>数据的可靠性</p>
+</li>
+</ol>
+<hr>
+<h2 id="2-Hash-Table">2. Hash Table</h2>
+<p><img src="https://ipfs.io/ipfs/QmPLrgbKARDLJYZ7uHbat3H6eVfds7wpEWSGNJ5u8icjRs" alt="hash_table"></p>
+<p><img src="https://ipfs.io/ipfs/QmTS14yPDLeGj28rz24AUXH68vmeunxLJfamF94xiqqusd" alt="hash_table_target"></p>
+<p><strong>Hash Function</strong></p>
+<ol>
+<li class="lvl-3">
+<p>将值转化为一个较小的键</p>
+</li>
+<li class="lvl-3">
+<p>在 <em>速度</em> 和 <em>碰撞率</em> 之间进行权衡。</p>
+</li>
+</ol>
+<p><strong>Hashing Scheme</strong></p>
+<ol>
+<li class="lvl-3">
+<p>该如何处置碰撞的情形</p>
+</li>
+<li class="lvl-3">
+<p>需要在 <em>哈希表大小</em> 与 <em>额外信息维护之间</em> 权衡</p>
+</li>
+</ol>
+<hr>
+<h2 id="3-Hash-Function">3. Hash Function</h2>
+<p>不管输入的 key 是什么，输出一个 <strong>特别的</strong> <em>数字</em> 的函数。</p>
+<p><img src="https://ipfs.io/ipfs/QmcgN4smq3GKho1E6jm2Z2yWvcwBR5GTuXV1Q6bBohCNJt" alt="Hash_Function"></p>
+<p><img src="https://ipfs.io/ipfs/Qmbko8F5hZKV5NxAZJMbfmcc3jv26iBH9uvYVoxeFRTmeS" alt="Hash_Function bench_mark"></p>
+<hr>
+<h2 id="4-Static-Hashing-Schemes">4. Static Hashing Schemes</h2>
+<h3 id="4-1-Linear-Probe-Hashing">4.1 Linear Probe Hashing</h3>
+<p>线性探针</p>
+<p>我们解决哈希冲突的方法是，如果我们的哈希函数返回的位置已经被占用了，那么则一直向下取一个位置，直到找到表中空的值。</p>
+<p>在删除操作中，可能会出现一种情形，有的值并不是 hash function 产生的直接值，而是通过一直取下一个位置得到的值。</p>
+<p>在这种情形下，我们所采取的方法有。</p>
+<ol>
+<li class="lvl-3">
+<p>将受到偏移影响的值往回调整。通过重新哈希的方式进行调整。效率比较低下。</p>
+</li>
+<li class="lvl-3">
+<p>将那些删除了的值标记为已删除。这些值可以在新的值需要使用的时候重新利用。不过需要周期性的垃圾回收。</p>
+</li>
+</ol>
+<p><strong>存储相同的值</strong></p>
+<p><img src="https://ipfs.io/ipfs/QmfB5t64wEpnMpyUKB8RKSeMjmmnkxs4uhEyLGrqC9ZcKA" alt="NON-UNIQUE-KEY"></p>
+<p>存储相同的 key 但有不同的 value 的值的时候，我们可以有两种办法解决。</p>
+<ol>
+<li class="lvl-3">
+<p>对于每个 key 他们的 value 开辟出来一个单独的空间</p>
+</li>
+<li class="lvl-3">
+<p>所有的 key 都用 哈希函数 散列在一个存储空间中。</p>
+</li>
+</ol>
+<h3 id="4-2-Robin-Hood-Hashing">4.2 Robin Hood Hashing</h3>
+<p>这是线性探针算法的一个升级版，旨在解决分布不均的问题。在上面的算法中，可能存在一些 key，经过哈希计算后可能会聚集在一块导致哈希算法劣化。 Robin Hood hashing 解决冲突的方式会将部分 <em>rich</em> 的 key 分配给 <em>poor</em> key.</p>
+<p>这种避免哈希碰撞的方法是，给每个值都记录一个偏移值，表中的每个值在向下搜索的时候，需要和表中的值进行对比。如果当前偏移值比表中值的偏移值大，那么则将当前值和表中值进行替换。直到找到空位结束。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Robin_hood_Hashing</span><span class="params">(<span class="type">int</span> key)</span> </span>&#123;</span><br><span class="line">     <span class="type">int</span> val = <span class="built_in">hash</span>(key);</span><br><span class="line">     <span class="type">int</span> offset = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">for</span> (<span class="type">int</span> i = val ; ; i ++ , offset ++ ) &#123;</span><br><span class="line">          <span class="keyword">if</span>(hash_table-&gt;<span class="built_in">is_empty</span>(i))&#123; </span><br><span class="line">               hash_table-&gt;<span class="built_in">insert</span>(i , val , offset);</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span>(hash_table-&gt;<span class="built_in">get_offset</span>(i) &lt; offset) &#123;</span><br><span class="line">               <span class="keyword">auto</span> [n_val , n_offset] = hash_table-&gt;<span class="built_in">get_data</span>(i);</span><br><span class="line">               hash_table-&gt;<span class="built_in">insert</span>(i , val , offset);</span><br><span class="line">               val = n_val , offset = n_offset;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span>(i == MAXSIZE) i = <span class="number">0</span>;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-Cuckoo-Hashing">4.3 Cuckoo Hashing</h3>
+<p>这种解决碰撞的方法是使用两种哈希函数和两张哈希表完成的。</p>
+<p>对于输入的 key 他会计算出 <code>val[0]</code> 和 <code>val[1]</code> 在不确定的情况下，会随机采用其中一个作为最终的结果，当其中一个触发冲突的时候，则采用一个哈希函数与哈希表。如果两个都冲突的话，那么则重新计算冲突的哈希，直到没有冲突。</p>
+<p>采用这正方法，在查询的时候复杂度永远都是 $O(1)$ ，但插入的代价比加大。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/efficient/libcuckoo/tree/master">open-source CMU 实现</a></p>
+<hr>
+<h2 id="5-Dynamic-Hashing-Schemes">5 Dynamic Hashing Schemes</h2>
+<p><a target="_blank" rel="noopener" href="https://ipfs.io/ipfs/QmVuuRrFwfEo7bRCHfgd3DtECUyXR3RMuXGFFFYtB3Vwdd">observation</a></p>
+<p>以上的的哈希表都基于固定大小的元素，所以需要一些动态的哈希表。</p>
+<h3 id="5-1-Chained-Hashing">5.1 Chained Hashing</h3>
+<p>对每个哈希值都维护一 个链表。将所有哈希值相同的键都放在一个 bucket 中。bucket 是通过链表的形式连接在一起的。</p>
+<p><img src="https://ipfs.io/ipfs/QmVamwFnGeAMucAgSzyYbjn6AifDRv5utYpsm7A2ZhgGRN" alt="Chained Hashing"></p>
+<h3 id="5-2-Extendible-Hashing">5.2 Extendible Hashing</h3>
+<p>在 bucket 快 满的时候，通过二进制前缀开辟新的 bucket。</p>
+<p><img src="https://ipfs.io/ipfs/QmNP81bLcQQmhPKKGK5dLqUsffYXTJjs7RjYmtnL9MYE8b" alt="splits"></p>
+<p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/extendible-hashing-dynamic-approach-to-dbms/">详解</a></p>
+<h3 id="5-3-Linear-Hashing">5.3 Linear Hashing</h3>
+<p>运行时动态扩容的一种哈希。</p>
+<p><a target="_blank" rel="noopener" href="https://ruby-china.org/topics/39466">详解</a></p>
+
+  </div>
+</article>
+
+
+
+    <div id="wcomments"></div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/links/">友链</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Data-Structure"><span class="toc-number">1.</span> <span class="toc-text">1. Data Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Hash-Table"><span class="toc-number">2.</span> <span class="toc-text">2. Hash Table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Hash-Function"><span class="toc-number">3.</span> <span class="toc-text">3. Hash Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Static-Hashing-Schemes"><span class="toc-number">4.</span> <span class="toc-text">4. Static Hashing Schemes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Linear-Probe-Hashing"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Linear Probe Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Robin-Hood-Hashing"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 Robin Hood Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Cuckoo-Hashing"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 Cuckoo Hashing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Dynamic-Hashing-Schemes"><span class="toc-number">5.</span> <span class="toc-text">5 Dynamic Hashing Schemes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Chained-Hashing"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 Chained Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-Extendible-Hashing"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 Extendible Hashing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-Linear-Hashing"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 Linear Hashing</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&text=	Lecture #07: Hash Tables"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&is_video=false&description=	Lecture #07: Hash Tables"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=	Lecture #07: Hash Tables&body=Check out this article: http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&title=	Lecture #07: Hash Tables"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&name=	Lecture #07: Hash Tables&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/&t=	Lecture #07: Hash Tables"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    ph
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/links/">友链</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+<!-- Waline Comments -->
+
+<div id="wcomments"></div>
+<link href='//cdn.jsdelivr.net/npm/@waline/client/dist/waline.css' rel='stylesheet' />
+<style type="text/css">
+:root {
+  --waline-white: #000;
+  --waline-light-grey: #666;
+  --waline-dark-grey: #999;
+
+  /* 布局颜色 */
+  --waline-color: #888;
+  --waline-bg-color: #1e1e1e;
+  --waline-bg-color-light: #272727;
+  --waline-border-color: #333;
+  --waline-disable-bg-color: #444;
+  --waline-disable-color: #272727;
+
+  /* 特殊颜色 */
+  --waline-bq-color: #272727;
+
+  /* 其他颜色 */
+  --waline-info-bg-color: #272727;
+  --waline-info-color: #666;
+}
+body {
+  --waline-box-shadow: 0 12px 40px #0f0e0d;
+}
+
+.wl-content .vemoji, .wl-content .wl-emoji {
+    height: 3.75em;
+}
+
+</style>
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  init({
+    el: '#wcomments',
+    serverURL: 'https://waline-one-delta.vercel.app/',
+    emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/Real-king-Ph/emoji/hoyo_emoji',
+        'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji'
+      ],
+    imageUploader: false,
+    reaction: true,
+    dark: 'auto'
+  });
+</script>
+
+
+</body>
+</html>

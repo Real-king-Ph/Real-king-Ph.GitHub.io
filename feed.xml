@@ -6,7 +6,7 @@
   <link href="http://blog.ohtoai.fun/feed.xml" rel="self"/>
   
   <link href="http://blog.ohtoai.fun/"/>
-  <updated>2023-11-16T13:22:20.501Z</updated>
+  <updated>2023-11-20T12:22:37.000Z</updated>
   <id>http://blog.ohtoai.fun/</id>
   
   <author>
@@ -17,19 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>	Lecture #07: Hash Tables</title>
+    <link href="http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"/>
+    <id>http://blog.ohtoai.fun/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/</id>
+    <published>2023-11-19T11:41:33.000Z</published>
+    <updated>2023-11-20T12:22:37.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://15445.courses.cs.cmu.edu/fall2022/notes/07-hashtables.pdf&quot;&gt;refer to Note&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="CMU15-445" scheme="http://blog.ohtoai.fun/categories/CMU15-445/"/>
+    
+    
+    <category term="CMU15-445" scheme="http://blog.ohtoai.fun/tags/CMU15-445/"/>
+    
+    <category term="数据库" scheme="http://blog.ohtoai.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Lecture #06: Memory Management</title>
     <link href="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-23-Lecture-6-Memory-Management/"/>
     <id>http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-23-Lecture-6-Memory-Management/</id>
-    <published>2023-11-15T07:46:36.750Z</published>
-    <updated>2023-11-16T13:22:20.501Z</updated>
+    <published>2023-11-15T14:51:18.000Z</published>
+    <updated>2023-11-16T11:44:25.000Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;todo: &lt;a href=&quot;https://youtu.be/Y9H2HaRKOIw?t=2470&quot;&gt;https://youtu.be/Y9H2HaRKOIw?t=2470&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;1-Introduction&quot;&gt;1.</summary>
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://15445.courses.cs.cmu.edu/fall2022/notes/06-bufferpool.pdf&quot;&gt;refer to Note&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
         
       
     
@@ -46,10 +74,10 @@
   
   <entry>
     <title>《上个世纪的学校》 书摘</title>
-    <link href="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"/>
-    <id>http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/</id>
-    <published>2023-11-15T07:46:36.750Z</published>
-    <updated>2023-11-15T07:46:36.750Z</updated>
+    <link href="http://blog.ohtoai.fun/2023/10/23/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"/>
+    <id>http://blog.ohtoai.fun/2023/10/23/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/</id>
+    <published>2023-10-23T14:51:07.000Z</published>
+    <updated>2023-11-16T11:44:25.000Z</updated>
     
     
       
@@ -69,35 +97,11 @@
   </entry>
   
   <entry>
-    <title>清泉之心</title>
-    <link href="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-15-heart-of-Clean-Springs/"/>
-    <id>http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-15-heart-of-Clean-Springs/</id>
-    <published>2023-11-15T07:46:36.748Z</published>
-    <updated>2023-11-15T07:46:36.748Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;剧情PV&quot;&gt;剧情PV&lt;/h2&gt;
-&lt;iframe width=&quot;854&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/bdduDpNxknE&quot; title=&quot;《原神》剧情PV-「清泉之心」&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="game" scheme="http://blog.ohtoai.fun/tags/game/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Lecture #05: Storage Models &amp; Compression</title>
-    <link href="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"/>
-    <id>http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/</id>
-    <published>2023-11-15T07:46:36.748Z</published>
-    <updated>2023-11-15T07:46:36.749Z</updated>
+    <link href="http://blog.ohtoai.fun/2023/10/19/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"/>
+    <id>http://blog.ohtoai.fun/2023/10/19/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/</id>
+    <published>2023-10-19T14:50:55.000Z</published>
+    <updated>2023-11-16T11:44:25.000Z</updated>
     
     
       
@@ -121,11 +125,35 @@
   </entry>
   
   <entry>
+    <title>清泉之心</title>
+    <link href="http://blog.ohtoai.fun/2023/10/15/23Y-Q4-10-15-heart-of-Clean-Springs/"/>
+    <id>http://blog.ohtoai.fun/2023/10/15/23Y-Q4-10-15-heart-of-Clean-Springs/</id>
+    <published>2023-10-15T14:50:41.000Z</published>
+    <updated>2023-11-16T11:44:25.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;剧情PV&quot;&gt;剧情PV&lt;/h2&gt;
+&lt;iframe width=&quot;854&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/bdduDpNxknE&quot; title=&quot;《原神》剧情PV-「清泉之心」&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="game" scheme="http://blog.ohtoai.fun/tags/game/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CMU15445 Project 0 Trie_Tree</title>
-    <link href="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/"/>
-    <id>http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/</id>
-    <published>2023-11-15T07:46:36.747Z</published>
-    <updated>2023-11-15T07:46:36.747Z</updated>
+    <link href="http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/"/>
+    <id>http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/</id>
+    <published>2023-09-27T14:49:18.000Z</published>
+    <updated>2023-11-16T11:44:25.000Z</updated>
     
     
       

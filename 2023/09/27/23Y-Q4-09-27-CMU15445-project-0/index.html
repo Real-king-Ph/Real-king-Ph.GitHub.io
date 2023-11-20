@@ -9,7 +9,7 @@
     <meta name="description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容   如何搭建环境   C++的使用   classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CMU15445 Project 0 Trie_Tree">
-<meta property="og:url" content="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/">
+<meta property="og:url" content="http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/">
 <meta property="og:site_name" content="RK&#39;s blog">
 <meta property="og:description" content="实验目标 该实验为 CMU 15-445&#x2F;645 的前置实现。主要考察 C++ 使用的功底。 我所采用的课程为 fall2022[1] 相关代码可以在 Release[2] 中下载 该课程主要涉及到两方面内容   如何搭建环境   C++的使用   classDiagram class TrieNode {  + TrieNode(char keychar)  + TrieNode(TrieNod">
 <meta property="og:locale" content="zh_CN">
@@ -17,8 +17,8 @@
 <meta property="og:image" content="https://s2.loli.net/2023/10/02/MRDE97WAlb5ht6w.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/02/hXI9qEDSOpasglx.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/02/2F1ToQA6LgkyvID.png">
-<meta property="article:published_time" content="2023-11-15T07:46:36.747Z">
-<meta property="article:modified_time" content="2023-11-15T07:46:36.747Z">
+<meta property="article:published_time" content="2023-09-27T14:49:18.000Z">
+<meta property="article:modified_time" content="2023-11-16T11:44:25.000Z">
 <meta property="article:author" content="ph">
 <meta property="article:tag" content="CMU15-445">
 <meta property="article:tag" content="数据库">
@@ -118,7 +118,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="上一篇" href="/2023/11/15/23Y-Q4-10-19-Lecture-5-Storage-Models-Compression/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2023/10/15/23Y-Q4-10-15-heart-of-Clean-Springs/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
@@ -132,17 +132,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&text=CMU15445 Project 0 Trie_Tree"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&is_video=false&description=CMU15445 Project 0 Trie_Tree"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CMU15445 Project 0 Trie_Tree&body=Check out this article: http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&name=CMU15445 Project 0 Trie_Tree&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&t=CMU15445 Project 0 Trie_Tree"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&text=CMU15445 Project 0 Trie_Tree"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&is_video=false&description=CMU15445 Project 0 Trie_Tree"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CMU15445 Project 0 Trie_Tree&body=Check out this article: http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&name=CMU15445 Project 0 Trie_Tree&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&t=CMU15445 Project 0 Trie_Tree"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -174,7 +174,7 @@
       
     <div class="postdate">
       
-        <time datetime="2023-11-15T07:46:36.747Z" class="dt-published" itemprop="datePublished">2023-11-15</time>
+        <time datetime="2023-09-27T14:49:18.000Z" class="dt-published" itemprop="datePublished">2023-09-27</time>
         
       
     </div>
@@ -314,11 +314,7 @@ class Trie {
 
 
 
-    <div class="blog-post-comments">
-        <div id="utterances_thread">
-            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
-        </div>
-    </div>
+    <div id="wcomments"></div>
 
 
         
@@ -354,17 +350,17 @@ class Trie {
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&text=CMU15445 Project 0 Trie_Tree"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&is_video=false&description=CMU15445 Project 0 Trie_Tree"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CMU15445 Project 0 Trie_Tree&body=Check out this article: http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&name=CMU15445 Project 0 Trie_Tree&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/15/23Y-Q4-09-27-CMU15445-project-0/&t=CMU15445 Project 0 Trie_Tree"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&text=CMU15445 Project 0 Trie_Tree"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&is_video=false&description=CMU15445 Project 0 Trie_Tree"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CMU15445 Project 0 Trie_Tree&body=Check out this article: http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&title=CMU15445 Project 0 Trie_Tree"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&name=CMU15445 Project 0 Trie_Tree&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/09/27/23Y-Q4-09-27-CMU15445-project-0/&t=CMU15445 Project 0 Trie_Tree"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -418,7 +414,7 @@ class Trie {
 
 
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->

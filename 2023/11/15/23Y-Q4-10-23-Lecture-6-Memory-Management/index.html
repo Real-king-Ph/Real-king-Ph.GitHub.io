@@ -6,34 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="todo: https:&#x2F;&#x2F;youtu.be&#x2F;Y9H2HaRKOIw?t&#x3D;2470 1. Introduction 如何存储：   我们的 pages 要存储在 disk 上的什么样的地方   快速操作：   对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。      2. Locks vs. Latches   3. Buffer">
+    <meta name="description" content="refer to Note refer to Slide 1. Introduction 如何存储：   我们的 pages 要存储在 disk 上的什么样的地方   快速操作：   对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。      2. Locks vs. Latches   3. Buffer Pool Memory">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture #06: Memory Management">
 <meta property="og:url" content="http://blog.ohtoai.fun/2023/11/15/23Y-Q4-10-23-Lecture-6-Memory-Management/">
 <meta property="og:site_name" content="RK&#39;s blog">
-<meta property="og:description" content="todo: https:&#x2F;&#x2F;youtu.be&#x2F;Y9H2HaRKOIw?t&#x3D;2470 1. Introduction 如何存储：   我们的 pages 要存储在 disk 上的什么样的地方   快速操作：   对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。      2. Locks vs. Latches   3. Buffer">
+<meta property="og:description" content="refer to Note refer to Slide 1. Introduction 如何存储：   我们的 pages 要存储在 disk 上的什么样的地方   快速操作：   对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。      2. Locks vs. Latches   3. Buffer Pool Memory">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/Qmd4Ru91wEckAkCukc6gooxtsF5uid8wTkFNTRDsUz1MdD">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmZcfwGcz4kqLbfRsiMFjp7d2c9UVK7RvrxfyoEHuNAezh">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmeudvGi34M1W8gBkn6meRA8vFCWSnYqpcfWgrqAu4GXzT">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmPwVEC3FkiDvkkZtBLC6j1Bj2e7FaBsVCKuT2vGvfdW9P">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmYcUwX9zREMD3WL3Dr7yMimPiYHmgiZddgeUdxazCU1ti?filename=image.png">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmeUPyJ2nh5qVv9bQVGhtHS7rg9HCcdtsYkPdGV3C3zHLG?filename=image.png">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmS7XuiwDB71XG25B1RLeVHQ4YstpxfYb6ECGeurKZNAuN?filename=image.png">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmWVEZBVH4uzkyPjPPAVitn9hQyJmuouHDUK382UFcHfKw?filename=image.png">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmRjU4Vi8MT14NE2PbEKx4YvE9kiu1DaqefVX1ZaJMhpaA?filename=image.png">
-<meta property="og:image" content="https://ipfs.io/ipfs/Qmbjt1dV3DPC9y5ktoyLm1Yq46fx9tBieGQFLtfjQn8iSY?filename=image.png">
-<meta property="og:image" content="https://cf-ipfs.com/ipfs/QmPdiuvUbFdxx6gFpqN9EL5Pscs7CAp67Ne3RkTuRs99fK?filename=image.png">
-<meta property="og:image" content="https://ipfs.io/ipfs/QmWU6wBvP4bg6EnPPFBPPfWEDmeAzWMcimHk777gmZvdKq?filename=image.png">
-<meta property="article:published_time" content="2023-11-15T07:46:36.750Z">
-<meta property="article:modified_time" content="2023-11-16T13:22:20.501Z">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS">
+<meta property="og:image" content="https://ipfs.io/ipfs/Qmd4Ru91wEckAkCukc6gooxtsF5uid8wTkFNTRDsUz1MdD">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmZcfwGcz4kqLbfRsiMFjp7d2c9UVK7RvrxfyoEHuNAezh">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmeudvGi34M1W8gBkn6meRA8vFCWSnYqpcfWgrqAu4GXzT">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmPwVEC3FkiDvkkZtBLC6j1Bj2e7FaBsVCKuT2vGvfdW9P">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmYcUwX9zREMD3WL3Dr7yMimPiYHmgiZddgeUdxazCU1ti">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmeUPyJ2nh5qVv9bQVGhtHS7rg9HCcdtsYkPdGV3C3zHLG">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmS7XuiwDB71XG25B1RLeVHQ4YstpxfYb6ECGeurKZNAuN">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmWVEZBVH4uzkyPjPPAVitn9hQyJmuouHDUK382UFcHfKw">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmRjU4Vi8MT14NE2PbEKx4YvE9kiu1DaqefVX1ZaJMhpaA">
+<meta property="og:image" content="https://ipfs.io/ipfs/Qmbjt1dV3DPC9y5ktoyLm1Yq46fx9tBieGQFLtfjQn8iSY">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmPdiuvUbFdxx6gFpqN9EL5Pscs7CAp67Ne3RkTuRs99fK">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmWU6wBvP4bg6EnPPFBPPfWEDmeAzWMcimHk777gmZvdKq">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmdakwRMowx1BTC2BSJnZSGdDtDxJQBBVfnEAUQ2A59Mxk">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmTCesEwNanWC9JBFcVcRvTZgKMNDmiPYZ8RWrudxHc9o1">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmdFFaYegTC4dTbMhuhRtYGKJSi4NCS4vkjNBXsunXfCVv">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmQLMPUdZkrwNJ76BofzxnrZo6KXEaJ547sZw6YM73UU1j">
+<meta property="og:image" content="https://ipfs.io/ipfs/Qmd5wfNRQZv3fqCxo9E6avNnus3Ds9r1fVMZKxkDEej9LM">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmSUPwbF9xn8Jb6aqFZcMS4N7Dkv278AJkAxPa9UB9xUEv?filename=image.png">
+<meta property="og:image" content="https://ipfs.io/ipfs/Qmb1KVRbZLhGufcjPszvZzBx7VL9zfb3ZkVrqwMkCVgC2X?filename=image.png">
+<meta property="article:published_time" content="2023-11-15T14:51:18.000Z">
+<meta property="article:modified_time" content="2023-11-16T11:44:25.000Z">
 <meta property="article:author" content="ph">
 <meta property="article:tag" content="CMU15-445">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cf-ipfs.com/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq">
+<meta name="twitter:image" content="https://ipfs.io/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq">
     
     
       
@@ -126,8 +133,10 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="上一篇" href="/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="下一篇" href="/2023/11/15/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/10/23/23Y-Q4-10-23-%E4%B8%8A%E4%B8%AA%E4%B8%96%E7%BA%AA%E7%9A%84%E5%AD%A6%E6%A0%A1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -157,7 +166,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">3.2.</span> <span class="toc-text">Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Buffer-Pool-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">4.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing-Synchornized-Scans"><span class="toc-number">4.3.</span> <span class="toc-text">Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">4.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-OS-Page-Cache"><span class="toc-number">5.</span> <span class="toc-text">5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Buffer-Replacement-Policies"><span class="toc-number">6.</span> <span class="toc-text">6. Buffer Replacement Policies</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">3.2.</span> <span class="toc-text">Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Buffer-Pool-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">4.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing-Synchornized-Scans"><span class="toc-number">4.3.</span> <span class="toc-text">Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">4.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-OS-Page-Cache"><span class="toc-number">5.</span> <span class="toc-text">5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Buffer-Replacement-Policies"><span class="toc-number">6.</span> <span class="toc-text">6. Buffer Replacement Policies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Least-Recently-Used-LRU"><span class="toc-number">6.1.</span> <span class="toc-text">Least Recently Used (LRU)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CLOCK"><span class="toc-number">6.2.</span> <span class="toc-text">CLOCK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alternatives"><span class="toc-number">6.3.</span> <span class="toc-text">Alternatives</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dirty-Page"><span class="toc-number">6.4.</span> <span class="toc-text">Dirty Page</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Other-Memory-Pools"><span class="toc-number">7.</span> <span class="toc-text">7. Other Memory Pools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tasks"><span class="toc-number">8.</span> <span class="toc-text">Tasks</span></a></li></ol>
       </div>
     
   </span>
@@ -182,7 +191,7 @@
       
     <div class="postdate">
       
-        <time datetime="2023-11-15T07:46:36.750Z" class="dt-published" itemprop="datePublished">2023-11-15</time>
+        <time datetime="2023-11-15T14:51:18.000Z" class="dt-published" itemprop="datePublished">2023-11-15</time>
         
       
     </div>
@@ -207,7 +216,8 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p>todo: <a target="_blank" rel="noopener" href="https://youtu.be/Y9H2HaRKOIw?t=2470">https://youtu.be/Y9H2HaRKOIw?t=2470</a></p>
+    <p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/notes/06-bufferpool.pdf">refer to Note</a></p>
+<p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/slides/06-bufferpool.pdf">refer to Slide</a></p>
 <h2 id="1-Introduction">1. Introduction</h2>
 <p>如何存储：</p>
 <ul class="lvl-0">
@@ -219,22 +229,22 @@
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>对于 DBMS 来说，在进行操作数据之前需要将所有的的数据从 Disk 先转移到 Memory 中才可以进行操作。<br>
-<img src="https://cf-ipfs.com/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq" alt="image"></p>
+<img src="https://ipfs.io/ipfs/QmQj1jJ4oBaTXGSq2FYcHZKNz2y2aN3TmjcJqDECtCAxkq" alt="image"></p>
 </li>
 </ul>
-<p><img src="https://cf-ipfs.com/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS" alt="image"></p>
+<p><img src="https://ipfs.io/ipfs/QmSFSzXFhUmf3Md5ruAg9PNNQwDQo82TH3a2sbDuLduuPS" alt="image"></p>
 <hr>
 <h2 id="2-Locks-vs-Latches">2. Locks vs. Latches</h2>
-<p><img src="https://cf-ipfs.com/ipfs/Qmd4Ru91wEckAkCukc6gooxtsF5uid8wTkFNTRDsUz1MdD" alt="image"></p>
+<p><img src="https://ipfs.io/ipfs/Qmd4Ru91wEckAkCukc6gooxtsF5uid8wTkFNTRDsUz1MdD" alt="image"></p>
 <hr>
 <h2 id="3-Buffer-Pool">3. Buffer Pool</h2>
 <p>Memory 中存储的是一个个固定大小的 pages。</p>
 <p>其中的每一个记录称之为 <em>frame</em></p>
 <p>当我们需要一个 page 的时候，我们会立刻复制一个 frame。</p>
 <p>Dirty pages 不会立刻写回。(Write-Back Cache)</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmZcfwGcz4kqLbfRsiMFjp7d2c9UVK7RvrxfyoEHuNAezh" alt="image"></p>
+<p><img src="https://ipfs.io/ipfs/QmZcfwGcz4kqLbfRsiMFjp7d2c9UVK7RvrxfyoEHuNAezh" alt="image"></p>
 <h3 id="Buffer-Pool-Meta-data">Buffer Pool Meta-data</h3>
-<p><img src="https://cf-ipfs.com/ipfs/QmeudvGi34M1W8gBkn6meRA8vFCWSnYqpcfWgrqAu4GXzT" alt="image"></p>
+<p><img src="https://ipfs.io/ipfs/QmeudvGi34M1W8gBkn6meRA8vFCWSnYqpcfWgrqAu4GXzT" alt="image"></p>
 <p><em>page table</em> 是用来跟踪哪些 pages 在 memory 中。</p>
 <p>通常还有一些信息也会被保存在 page table 中</p>
 <ul class="lvl-0">
@@ -252,7 +262,7 @@
 <p><strong>page table</strong> 是一个将 page id 映射到 buffer pool 中的帧上的映射。这是一个 in-memory 的数据结构不需要存储在 disk 上。</p>
 </blockquote>
 <h3 id="Memory-Allocation-Policies">Memory Allocation Policies</h3>
-<p><img src="https://cf-ipfs.com/ipfs/QmPwVEC3FkiDvkkZtBLC6j1Bj2e7FaBsVCKuT2vGvfdW9P" alt="Allocation Policies"></p>
+<p><img src="https://ipfs.io/ipfs/QmPwVEC3FkiDvkkZtBLC6j1Bj2e7FaBsVCKuT2vGvfdW9P" alt="Allocation Policies"></p>
 <p>全局策略</p>
 <ul class="lvl-0">
 <li class="lvl-2">
@@ -269,20 +279,19 @@
 <h2 id="4-Buffer-Pool-Optimizations">4. Buffer Pool Optimizations</h2>
 <h3 id="Multiple-Buffer-Pools">Multiple Buffer Pools</h3>
 <p>通常 DBMS 不总是仅仅有一个 buffer pool</p>
-<p><img src="https://cf-ipfs.com/ipfs/QmYcUwX9zREMD3WL3Dr7yMimPiYHmgiZddgeUdxazCU1ti?filename=image.png" alt=""></p>
-<p>DBMS 维护多个 buffer pool 是为了多种目的 s (i.e per-database buffer pool, per-page type buffer<br>
-pool)。然后每个缓冲池可以针对每个存储在其中的数量进行定制本地策略。</p>
+<p><img src="https://ipfs.io/ipfs/QmYcUwX9zREMD3WL3Dr7yMimPiYHmgiZddgeUdxazCU1ti" alt=""></p>
+<p>DBMS 维护多个 buffer pool 是为了多种目的 (i.e per-database buffer pool, per-page type buffer pool)。然后每个缓冲池可以针对每个存储在其中的数量进行定制本地策略。</p>
 <p>主要有两种方式访问不同的buffer Pool</p>
 <ol>
 <li class="lvl-3">
 <p>Object id<br>
 通过 Object Id 来识别不同的 buffer pool<br>
-<img src="https://cf-ipfs.com/ipfs/QmeUPyJ2nh5qVv9bQVGhtHS7rg9HCcdtsYkPdGV3C3zHLG?filename=image.png" alt=""></p>
+<img src="https://ipfs.io/ipfs/QmeUPyJ2nh5qVv9bQVGhtHS7rg9HCcdtsYkPdGV3C3zHLG" alt=""></p>
 </li>
 <li class="lvl-3">
 <p>Hashing<br>
 通过 hash page id 来识别不同的 buffer pool<br>
-<img src="https://cf-ipfs.com/ipfs/QmS7XuiwDB71XG25B1RLeVHQ4YstpxfYb6ECGeurKZNAuN?filename=image.png" alt=""></p>
+<img src="https://ipfs.io/ipfs/QmS7XuiwDB71XG25B1RLeVHQ4YstpxfYb6ECGeurKZNAuN" alt=""></p>
 </li>
 </ol>
 <h3 id="Pre-fetching">Pre-fetching</h3>
@@ -296,68 +305,103 @@ pool)。然后每个缓冲池可以针对每个存储在其中的数量进行定
 </li>
 </ul>
 <blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/QmWVEZBVH4uzkyPjPPAVitn9hQyJmuouHDUK382UFcHfKw?filename=image.png" alt=""><br>
+<p><img src="https://ipfs.io/ipfs/QmWVEZBVH4uzkyPjPPAVitn9hQyJmuouHDUK382UFcHfKw" alt=""><br>
 查询到 page1 的时候 buffer pool 就将接下来需要解析的加载到 buffer pool中</p>
 </blockquote>
 <blockquote>
-<p><img src="https://cf-ipfs.com/ipfs/QmRjU4Vi8MT14NE2PbEKx4YvE9kiu1DaqefVX1ZaJMhpaA?filename=image.png" alt=""><br>
+<p><img src="https://ipfs.io/ipfs/QmRjU4Vi8MT14NE2PbEKx4YvE9kiu1DaqefVX1ZaJMhpaA" alt=""><br>
 同样是可以提前加载</p>
 </blockquote>
 <h3 id="Scan-Sharing-Synchornized-Scans">Scan Sharing(Synchornized Scans)</h3>
 <p>通常发生在多次查询同一个东西的时候。</p>
 <p>如果第一个查询一张表，不久之后第二个也在查询同一张表，那么最终的情况会第二个查询会和第一个查询进行同步查询。在第一个查询结束后，第二个查询会补查漏掉的数据。</p>
 <blockquote>
-<p>在 Q1 查询到了一半的时候 Q2 也执行了同样的查询<img src="https://ipfs.io/ipfs/Qmbjt1dV3DPC9y5ktoyLm1Yq46fx9tBieGQFLtfjQn8iSY?filename=image.png" alt="scan sharing_1"><br>
-由于 Q1 已经查询了一段距离，在 Buffer pool 中重新载入 page0 是非常浪费的。那么我们可以和 Q1 一起查询。<img src="https://cf-ipfs.com/ipfs/QmPdiuvUbFdxx6gFpqN9EL5Pscs7CAp67Ne3RkTuRs99fK?filename=image.png" alt="scan sharing_2"><br>
-在一起查询结束之后我们再去查询 Q2 剩下来的 page0-page2</p>
+<p>在 Q1 查询到了一半的时候 Q2 也执行了同样的查询</p>
+<p><img src="https://ipfs.io/ipfs/Qmbjt1dV3DPC9y5ktoyLm1Yq46fx9tBieGQFLtfjQn8iSY" alt="scan sharing_1"></p>
+<p>由于 Q1 已经查询了一段距离，在 Buffer pool 中重新载入 page0 是非常浪费的。那么我们可以和 Q1 一起查询。</p>
+<p><img src="https://ipfs.io/ipfs/QmPdiuvUbFdxx6gFpqN9EL5Pscs7CAp67Ne3RkTuRs99fK" alt="scan sharing_2"></p>
+<p>在一起查询结束之后我们再去查询 Q2 剩下来的 page0-page2</p>
 </blockquote>
 <blockquote>
-<p>如果启用这种策略进行查询到的话，那么最终的结果可能是不同的。因为我们的查询是无序的。对于一个顺序十分重要且确定的结构中，一般不会采用这种方式进行查询。<br>
-<img src="https://ipfs.io/ipfs/QmWU6wBvP4bg6EnPPFBPPfWEDmeAzWMcimHk777gmZvdKq?filename=image.png" alt="scan sharing_3" title="不同时间的查询的结果是不一样的"></p>
+<p>如果启用这种策略进行查询到的话，那么最终的结果可能是不同的。因为我们的查询是无序的。对于一个顺序十分重要且确定的结构中，一般不会采用这种方式进行查询。</p>
+<p><img src="https://ipfs.io/ipfs/QmWU6wBvP4bg6EnPPFBPPfWEDmeAzWMcimHk777gmZvdKq" alt="scan sharing_3" title="不同时间的查询的结果是不一样的"></p>
 </blockquote>
 <h3 id="Buffer-Pool-Bypass">Buffer Pool Bypass</h3>
 <p>对于一些操作可能不会存储在 buffer pool 中，这样可以减少开销。</p>
 <hr>
 <h2 id="5-OS-Page-Cache">5. OS Page Cache</h2>
+<p><img src="https://ipfs.io/ipfs/QmdakwRMowx1BTC2BSJnZSGdDtDxJQBBVfnEAUQ2A59Mxk" alt="OS Page Cache"></p>
+<p>在 DBMS 中通常不会直接采用 OS 的的文件管理。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>减少 pages 的多次拷贝</p>
+</li>
+<li class="lvl-2">
+<p>减少 page 的退出策略</p>
+</li>
+<li class="lvl-2">
+<p>加强对 I/O 的控制</p>
+</li>
+</ul>
 <hr>
 <h2 id="6-Buffer-Replacement-Policies">6. Buffer Replacement Policies</h2>
+<p><img src="https://ipfs.io/ipfs/QmTCesEwNanWC9JBFcVcRvTZgKMNDmiPYZ8RWrudxHc9o1" alt="Buffer Replacement Policies"></p>
+<p>当 DBMS 需要将 buffer pool 里的 frame 给清除了，需要决定就近是哪个页退出。</p>
+<p>所以 Buffer Replacement Policies 就是关于清除 frame 的算法。</p>
+<p>它的主要目标是</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>正确</p>
+</li>
+<li class="lvl-2">
+<p>一致</p>
+</li>
+<li class="lvl-2">
+<p>速度</p>
+</li>
+<li class="lvl-2">
+<p>元数据的开销</p>
+</li>
+</ul>
+<h3 id="Least-Recently-Used-LRU">Least Recently Used (LRU)</h3>
+<p><img src="https://ipfs.io/ipfs/QmdFFaYegTC4dTbMhuhRtYGKJSi4NCS4vkjNBXsunXfCVv" alt="LRU"></p>
+<p>维护一个时间表来记录哪个 page 是最后被访问的，在需要置换 frame 的时候，将最后被访问的页面给置换出去。</p>
+<h3 id="CLOCK">CLOCK</h3>
+<p><img src="https://ipfs.io/ipfs/QmQLMPUdZkrwNJ76BofzxnrZo6KXEaJ547sZw6YM73UU1j" alt="CLOCK"></p>
+<p>clock 算法是 LRU 的一种近似的产物。它的好处是不再需要一张时间表来记录各个 pages 了，而采用 bit 的形式记录。</p>
+<p>Clock 是，将所有的页面以某种顺序进行记录，并且该顺序是首位相连的。初始时，将所有的页都标记为 0 ，在某个页访问的时候，将该页的 bit 标记为一。在寻找需要置换的页面时，也将顺序的找下去，如遇到 page 的 bit 为 1 那么就将该 bit 置为 0 ， 如果该页的的 bit 为 0 ，那么则将该页置换下去。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">page_id <span class="title">clock_page</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">static</span> page_id ref =  <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> ( ; ; ref ++ ) &#123;</span><br><span class="line">		<span class="keyword">if</span>(ref &gt;= BUFFER_POOL_SIZE) ref = <span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (bit[ref]) </span><br><span class="line">			bit[ref] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">			<span class="keyword">return</span> ref;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Alternatives">Alternatives</h3>
+<p>不管是 <a href="#least-recently-used-lru">LRU</a> 还是 <a href="#clock">CLOCK</a> 都对 <strong>sequential flooding</strong> 操作影响较深。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一种顺序查询所有页的操作</p>
+</li>
+<li class="lvl-2">
+<p>这种操作仅仅执行一次，并且不会再次进行访问</p>
+</li>
+</ul>
+<p>这就会导致一种结果，Buffer pool 里面存储的数据不会是接下来需要用到的数据。</p>
+<p>为了减少这种情况的发生我们通常会采用 LRU-K 来进行置换。</p>
+<p><img src="https://ipfs.io/ipfs/Qmd5wfNRQZv3fqCxo9E6avNnus3Ds9r1fVMZKxkDEej9LM" alt="LRU-K"></p>
+<p>追踪每个页面的最近 K 次访问。DBMS 根据这个记录来确定访问优先级。</p>
+<h3 id="Dirty-Page">Dirty Page</h3>
+<p><img src="https://ipfs.io/ipfs/QmSUPwbF9xn8Jb6aqFZcMS4N7Dkv278AJkAxPa9UB9xUEv?filename=image.png" alt="Dirty Page"></p>
+<p>对于非 Dirty Page 而言，只需要将 page 丢掉即可，而 Dirty Page 则需要写回到 disk 上以保持持久性。</p>
+<p>为了避免这一现象，有一种策略是通过周期性扫描 buffer pool 中的 dirty pages 并将其写回 disk 中，这样就可以较为安全的移除 dirty pin flag 。</p>
 <hr>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get clean</span><br><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;HELLO WORLD&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>$$<br>
-\LaTeX{}<br>
-$$</p>
-<details open>
-<summary><span class="pre-summary">&nbsp;</span>click me</summary><p>this is content</p>
-</details>
-<p><input type="checkbox" id="checkbox0"><label for="checkbox0">sss</label></p>
-<div class="tips">
-<p><strong>提示</strong><br>
-这是一个提示</p>
-</div>
-<div class="warning">
-<p><strong>注意</strong><br>
-这是一个警告</p>
-</div>
-<div class="danger">
-<p><strong>警告</strong><br>
-这是一个危险信号</p>
-</div>
-<div class="success">
-<p><strong>成功</strong><br>
-这是一个成功信号</p>
-</div>
+<h2 id="7-Other-Memory-Pools">7. Other Memory Pools</h2>
+<p><img src="https://ipfs.io/ipfs/Qmb1KVRbZLhGufcjPszvZzBx7VL9zfb3ZkVrqwMkCVgC2X?filename=image.png" alt="Other Buffer Pools"></p>
+<hr>
+<h2 id="Tasks">Tasks</h2>
+<p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/project1/">https://15445.courses.cs.cmu.edu/fall2022/project1/</a></p>
 
   </div>
 </article>
 
 
 
-    <div class="blog-post-comments">
-        <div id="utterances_thread">
-            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
-        </div>
-    </div>
+    <div id="wcomments"></div>
 
 
         
@@ -387,7 +431,7 @@ $$</p>
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">3.2.</span> <span class="toc-text">Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Buffer-Pool-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">4.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing-Synchornized-Scans"><span class="toc-number">4.3.</span> <span class="toc-text">Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">4.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-OS-Page-Cache"><span class="toc-number">5.</span> <span class="toc-text">5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Buffer-Replacement-Policies"><span class="toc-number">6.</span> <span class="toc-text">6. Buffer Replacement Policies</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-number">1.</span> <span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Locks-vs-Latches"><span class="toc-number">2.</span> <span class="toc-text">2. Locks vs. Latches</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Buffer-Pool"><span class="toc-number">3.</span> <span class="toc-text">3. Buffer Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Meta-data"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer Pool Meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Allocation-Policies"><span class="toc-number">3.2.</span> <span class="toc-text">Memory Allocation Policies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Buffer-Pool-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Buffer Pool Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Buffer-Pools"><span class="toc-number">4.1.</span> <span class="toc-text">Multiple Buffer Pools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pre-fetching"><span class="toc-number">4.2.</span> <span class="toc-text">Pre-fetching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scan-Sharing-Synchornized-Scans"><span class="toc-number">4.3.</span> <span class="toc-text">Scan Sharing(Synchornized Scans)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-Pool-Bypass"><span class="toc-number">4.4.</span> <span class="toc-text">Buffer Pool Bypass</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-OS-Page-Cache"><span class="toc-number">5.</span> <span class="toc-text">5. OS Page Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Buffer-Replacement-Policies"><span class="toc-number">6.</span> <span class="toc-text">6. Buffer Replacement Policies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Least-Recently-Used-LRU"><span class="toc-number">6.1.</span> <span class="toc-text">Least Recently Used (LRU)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CLOCK"><span class="toc-number">6.2.</span> <span class="toc-text">CLOCK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alternatives"><span class="toc-number">6.3.</span> <span class="toc-text">Alternatives</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dirty-Page"><span class="toc-number">6.4.</span> <span class="toc-text">Dirty Page</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Other-Memory-Pools"><span class="toc-number">7.</span> <span class="toc-text">7. Other Memory Pools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tasks"><span class="toc-number">8.</span> <span class="toc-text">Tasks</span></a></li></ol>
       </div>
     
 
@@ -457,7 +501,7 @@ $$</p>
 
 
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->
