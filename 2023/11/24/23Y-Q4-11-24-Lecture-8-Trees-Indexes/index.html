@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="refer to course refer to Note refer to Slide  1. Table Indexes2. B+ Tree  1. Table Indexes table index 是一份表属性的副本，主要用来加速。 table index 主要权衡两个方面的因素   维护的代价   加速的效果    2. B+ Tree  B+ 树是一个自平衡的数据结构，查找插入等操作的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture #08: Trees Indexes">
+<meta property="og:url" content="http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/">
+<meta property="og:site_name" content="RK&#39;s blog">
+<meta property="og:description" content="refer to course refer to Note refer to Slide  1. Table Indexes2. B+ Tree  1. Table Indexes table index 是一份表属性的副本，主要用来加速。 table index 主要权衡两个方面的因素   维护的代价   加速的效果    2. B+ Tree  B+ 树是一个自平衡的数据结构，查找插入等操作的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ipfs.io/ipfs/Qmf1iSgv1S3Y1zQdNMLv6vEYTuMkQFkar8qnXKS3KFbMgL">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmSUuU5ejZWCoJS9PasQHauYhRNFwi9Spa8Yot4MmPj5G8">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmWky989uLPgXE4FEBGwb54HYFKGiefoSe12YVmxdMgvBQ">
+<meta property="article:published_time" content="2023-11-24T06:58:56.000Z">
+<meta property="article:modified_time" content="2023-11-25T08:14:18.000Z">
+<meta property="article:author" content="ph">
+<meta property="article:tag" content="CMU15-445">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ipfs.io/ipfs/Qmf1iSgv1S3Y1zQdNMLv6vEYTuMkQFkar8qnXKS3KFbMgL">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Lecture #08: Trees Indexes</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="RK&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+  <!-- memraid -->
+  
+    <script src='https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        var mermaidOptions = {"theme":"neutral"};
+        mermaid.initialize(mermaidOptions);
+      }
+    </script>
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr" >
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/links/">友链</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/19/23Y-Q4-11-19-Lecture-7-Hash-Table/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&text=Lecture #08: Trees Indexes"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&is_video=false&description=Lecture #08: Trees Indexes"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lecture #08: Trees Indexes&body=Check out this article: http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&name=Lecture #08: Trees Indexes&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&t=Lecture #08: Trees Indexes"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Table-Indexes"><span class="toc-number">1.</span> <span class="toc-text">1. Table Indexes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-B-Tree"><span class="toc-number">2.</span> <span class="toc-text">2. B+ Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-VS-B-Tree"><span class="toc-number">2.1.</span> <span class="toc-text">B-Tree VS. B+Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT"><span class="toc-number">2.3.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">2.4.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Conditions"><span class="toc-number">2.5.</span> <span class="toc-text">Selection Conditions</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Lecture #08: Trees Indexes
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ph</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-24T06:58:56.000Z" class="dt-published" itemprop="datePublished">2023-11-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CMU15-445/">CMU15-445</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CMU15-445/" rel="tag">CMU15-445</a>, <a class="p-category" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=9QPr8Ufzt5M">refer to course</a></p>
+<p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/notes/08-trees.pdf">refer to Note</a></p>
+<p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/slides/08-trees.pdf">refer to Slide</a></p>
+<p><img src="https://ipfs.io/ipfs/Qmf1iSgv1S3Y1zQdNMLv6vEYTuMkQFkar8qnXKS3KFbMgL" alt="cover"></p>
+<p><div class="table-of-contents"><ul><li><a href="#1.-table-indexes">1. Table Indexes</a></li><li><a href="#2.-b%2B-tree">2. B+ Tree</a></li></ul></div></p>
+<hr>
+<h2 id="1-Table-Indexes">1. Table Indexes</h2>
+<p>table index 是一份表属性的副本，主要用来加速。</p>
+<p>table index 主要权衡两个方面的因素</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>维护的代价</p>
+</li>
+<li class="lvl-2">
+<p>加速的效果</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-B-Tree">2. B+ Tree</h2>
+<p><img src="https://ipfs.io/ipfs/QmSUuU5ejZWCoJS9PasQHauYhRNFwi9Spa8Yot4MmPj5G8" alt="B+Tree_attribute" title="B+树的属性"></p>
+<p>B+ 树是一个自平衡的数据结构，查找插入等操作的事件复杂度通常在 $O(\log{n})$ ，并且这种数据结构针对比较大的数据块做了优化。</p>
+<p>B+ 树是一个 <em><strong>M</strong></em>-叉搜索树有以下的特征：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>完美平衡（所有的叶子节点的层数都相同）</p>
+</li>
+<li class="lvl-2">
+<p>除了根节点外，左右节点的有 <code>M/2-1 &lt;= #keys &lt;= M-1</code></p>
+</li>
+<li class="lvl-2">
+<p>所有有 <strong><code>k</code></strong> 个 key 的节点都有 <strong><code>k+1</code></strong> 个非空子节点。</p>
+</li>
+</ul>
+<p><img src="https://ipfs.io/ipfs/QmWky989uLPgXE4FEBGwb54HYFKGiefoSe12YVmxdMgvBQ" alt="B+Tree Example" title="一个B+Tree 的例子"></p>
+<p>在 B+ 树中，叶子节点是存储最后我们需要的 key 的地方。因此我们如果要依据叶子节点去寻找最终的 val 的话，有以下两种方法。</p>
+<ol>
+<li class="lvl-3">
+<p>将 val 存在的地方用一个指针记录下地址</p>
+</li>
+<li class="lvl-3">
+<p>直接存储在叶子节点中。</p>
+</li>
+</ol>
+<h3 id="B-Tree-VS-B-Tree">B-Tree VS. B+Tree</h3>
+<p>B-树和B+树最主要区别是，B-树的 key 也存在于非叶子节点。因此B-树在利用存储空间上无疑相较于B+树更为优秀。</p>
+<p>因此可能存在以下的一些问题。</p>
+<ol>
+<li class="lvl-3">
+<p>B-树在遍历的时候不得不在各个节点中来回跳跃。而B+树则可以直接扫描。</p>
+</li>
+<li class="lvl-3">
+<p>B-树，在使用将 val 存储在节点中的方法可能会导致查询过慢。</p>
+</li>
+</ol>
+<h3 id="可视化">可视化</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</a></p>
+<h3 id="INSERT">INSERT</h3>
+<p>找到一个叶子节点进行插入。按照大小插入。</p>
+<p>如果该节点有足够的空间容纳，那么则插入停止。如果没有足够的空间那么有以下两步操作。</p>
+<ol>
+<li class="lvl-3">
+<p>将该节点以中间值对半分为两个节点。</p>
+</li>
+<li class="lvl-3">
+<p>将该中间值向上推给父节点。若没有父节点，则创造父节点。然后对父节点执行同样的操作。</p>
+</li>
+</ol>
+<h3 id="DELETE">DELETE</h3>
+<p>找到叶子节点进行删除。</p>
+<p>如果该叶子节点删除了该 key 之后至少有一半的容量，那么删除停止。</p>
+<p>如果该叶子节点只有 <code>M/2-1</code> 个 key 了，那么有以下两种策略</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>尝试将隔壁节点的值拿过来。</p>
+</li>
+<li class="lvl-2">
+<p>如果尝试失败那么则尝试将两个节点合并。</p>
+</li>
+</ul>
+<h3 id="Selection-Conditions">Selection Conditions</h3>
+<hr>
+
+  </div>
+</article>
+
+
+
+    <div id="wcomments"></div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/links/">友链</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Table-Indexes"><span class="toc-number">1.</span> <span class="toc-text">1. Table Indexes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-B-Tree"><span class="toc-number">2.</span> <span class="toc-text">2. B+ Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-VS-B-Tree"><span class="toc-number">2.1.</span> <span class="toc-text">B-Tree VS. B+Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT"><span class="toc-number">2.3.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">2.4.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Conditions"><span class="toc-number">2.5.</span> <span class="toc-text">Selection Conditions</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&text=Lecture #08: Trees Indexes"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&is_video=false&description=Lecture #08: Trees Indexes"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Lecture #08: Trees Indexes&body=Check out this article: http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&title=Lecture #08: Trees Indexes"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&name=Lecture #08: Trees Indexes&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/&t=Lecture #08: Trees Indexes"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    ph
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/links/">友链</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+<!-- Waline Comments -->
+
+<div id="wcomments"></div>
+<link href='//cdn.jsdelivr.net/npm/@waline/client/dist/waline.css' rel='stylesheet' />
+<style type="text/css">
+:root {
+  --waline-white: #000;
+  --waline-light-grey: #666;
+  --waline-dark-grey: #999;
+
+  /* 布局颜色 */
+  --waline-color: #888;
+  --waline-bg-color: #1e1e1e;
+  --waline-bg-color-light: #272727;
+  --waline-border-color: #333;
+  --waline-disable-bg-color: #444;
+  --waline-disable-color: #272727;
+
+  /* 特殊颜色 */
+  --waline-bq-color: #272727;
+
+  /* 其他颜色 */
+  --waline-info-bg-color: #272727;
+  --waline-info-color: #666;
+}
+body {
+  --waline-box-shadow: 0 12px 40px #0f0e0d;
+}
+
+.wl-content .vemoji, .wl-content .wl-emoji {
+    height: 3.75em;
+}
+
+</style>
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  init({
+    el: '#wcomments',
+    serverURL: 'https://waline-one-delta.vercel.app/',
+    emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/Real-king-Ph/emoji/hoyo_emoji',
+        'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji'
+      ],
+    imageUploader: false,
+    reaction: true,
+    dark: 'auto'
+  });
+</script>
+
+
+</body>
+</html>
