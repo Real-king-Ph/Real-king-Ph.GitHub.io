@@ -6,16 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="refer to course refer to Note refer to Slide  1. Table Indexes2. B+ Tree  1. Table Indexes table index 是一份表属性的副本，主要用来加速。 table index 主要权衡两个方面的因素   维护的代价   加速的效果    2. B+ Tree  B+ 树是一个自平衡的数据结构，查找插入等操作的">
+    <meta name="description" content="refer to course refer to Note refer to Slide  1. Table Indexes2. B+ Tree3. B+ Tree Design Choices4. Optimizations  1. Table Indexes table index 是一份表属性的副本，主要用来加速。 table index 主要权衡两个方面的因素   维护的代价   加速的效">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture #08: Trees Indexes">
 <meta property="og:url" content="http://blog.ohtoai.fun/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/">
 <meta property="og:site_name" content="RK&#39;s blog">
-<meta property="og:description" content="refer to course refer to Note refer to Slide  1. Table Indexes2. B+ Tree  1. Table Indexes table index 是一份表属性的副本，主要用来加速。 table index 主要权衡两个方面的因素   维护的代价   加速的效果    2. B+ Tree  B+ 树是一个自平衡的数据结构，查找插入等操作的">
+<meta property="og:description" content="refer to course refer to Note refer to Slide  1. Table Indexes2. B+ Tree3. B+ Tree Design Choices4. Optimizations  1. Table Indexes table index 是一份表属性的副本，主要用来加速。 table index 主要权衡两个方面的因素   维护的代价   加速的效">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ipfs.io/ipfs/Qmf1iSgv1S3Y1zQdNMLv6vEYTuMkQFkar8qnXKS3KFbMgL">
 <meta property="og:image" content="https://ipfs.io/ipfs/QmSUuU5ejZWCoJS9PasQHauYhRNFwi9Spa8Yot4MmPj5G8">
 <meta property="og:image" content="https://ipfs.io/ipfs/QmWky989uLPgXE4FEBGwb54HYFKGiefoSe12YVmxdMgvBQ">
+<meta property="og:image" content="https://ipfs.io/ipfs/QmReRx1KBQZUxJdVHgSUSydanhj3gbLc8aeC2cJxknP83U">
 <meta property="article:published_time" content="2023-11-24T06:58:56.000Z">
 <meta property="article:modified_time" content="2023-11-25T08:14:18.000Z">
 <meta property="article:author" content="ph">
@@ -146,7 +147,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Table-Indexes"><span class="toc-number">1.</span> <span class="toc-text">1. Table Indexes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-B-Tree"><span class="toc-number">2.</span> <span class="toc-text">2. B+ Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-VS-B-Tree"><span class="toc-number">2.1.</span> <span class="toc-text">B-Tree VS. B+Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT"><span class="toc-number">2.3.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">2.4.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Conditions"><span class="toc-number">2.5.</span> <span class="toc-text">Selection Conditions</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Table-Indexes"><span class="toc-number">1.</span> <span class="toc-text">1. Table Indexes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-B-Tree"><span class="toc-number">2.</span> <span class="toc-text">2. B+ Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-VS-B-Tree"><span class="toc-number">2.1.</span> <span class="toc-text">B-Tree VS. B+Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT"><span class="toc-number">2.3.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">2.4.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Conditions"><span class="toc-number">2.5.</span> <span class="toc-text">Selection Conditions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Duplicate-Keys"><span class="toc-number">2.6.</span> <span class="toc-text">Duplicate Keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clustered-Indexes"><span class="toc-number">2.7.</span> <span class="toc-text">Clustered Indexes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-B-Tree-Design-Choices"><span class="toc-number">3.</span> <span class="toc-text">3. B+ Tree Design Choices</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-Size"><span class="toc-number">3.1.</span> <span class="toc-text">Node Size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge-Threshold"><span class="toc-number">3.2.</span> <span class="toc-text">Merge Threshold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variable-length-Keys"><span class="toc-number">3.3.</span> <span class="toc-text">Variable length Keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intra-Node-Search"><span class="toc-number">3.4.</span> <span class="toc-text">Intra-Node Search</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-Swizzling"><span class="toc-number">4.1.</span> <span class="toc-text">Pointer Swizzling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bulk-Insert"><span class="toc-number">4.2.</span> <span class="toc-text">Bulk Insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prefix-Compression"><span class="toc-number">4.3.</span> <span class="toc-text">Prefix Compression</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -200,7 +201,7 @@
 <p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/notes/08-trees.pdf">refer to Note</a></p>
 <p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/slides/08-trees.pdf">refer to Slide</a></p>
 <p><img src="https://ipfs.io/ipfs/Qmf1iSgv1S3Y1zQdNMLv6vEYTuMkQFkar8qnXKS3KFbMgL" alt="cover"></p>
-<p><div class="table-of-contents"><ul><li><a href="#1.-table-indexes">1. Table Indexes</a></li><li><a href="#2.-b%2B-tree">2. B+ Tree</a></li></ul></div></p>
+<p><div class="table-of-contents"><ul><li><a href="#1.-table-indexes">1. Table Indexes</a></li><li><a href="#2.-b%2B-tree">2. B+ Tree</a></li><li><a href="#3.-b%2B-tree-design-choices">3. B+ Tree Design Choices</a></li><li><a href="#4.-optimizations">4. Optimizations</a></li></ul></div></p>
 <hr>
 <h2 id="1-Table-Indexes">1. Table Indexes</h2>
 <p>table index 是一份表属性的副本，主要用来加速。</p>
@@ -276,7 +277,32 @@
 </li>
 </ul>
 <h3 id="Selection-Conditions">Selection Conditions</h3>
+<p>具有与树结构查询的优缺点。</p>
+<h3 id="Duplicate-Keys">Duplicate Keys</h3>
+<p>有两种方式来解决重复的 keys</p>
+<ol>
+<li class="lvl-3">
+<p>在所有的 key 后面加入 recorid ID 来确保每个 key 都是独一无二的。</p>
+</li>
+<li class="lvl-3">
+<p>使用一个可以溢出的节点来保存这些重复的信息。<br>
+<img src="https://ipfs.io/ipfs/QmReRx1KBQZUxJdVHgSUSydanhj3gbLc8aeC2cJxknP83U" alt="溢出节点" title="使用溢出节点保存信息"></p>
+</li>
+</ol>
+<h3 id="Clustered-Indexes">Clustered Indexes</h3>
+<p>表通常依照 primary key 进行索引。</p>
+<p>不过有一些数据库采用聚集索引，会为表加上一个隐藏的 primary key。别的数据库通常无法使用这个索引</p>
 <hr>
+<h2 id="3-B-Tree-Design-Choices">3. B+ Tree Design Choices</h2>
+<h3 id="Node-Size">Node Size</h3>
+<h3 id="Merge-Threshold">Merge Threshold</h3>
+<h3 id="Variable-length-Keys">Variable length Keys</h3>
+<h3 id="Intra-Node-Search">Intra-Node Search</h3>
+<hr>
+<h2 id="4-Optimizations">4. Optimizations</h2>
+<h3 id="Pointer-Swizzling">Pointer Swizzling</h3>
+<h3 id="Bulk-Insert">Bulk Insert</h3>
+<h3 id="Prefix-Compression">Prefix Compression</h3>
 
   </div>
 </article>
@@ -313,7 +339,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Table-Indexes"><span class="toc-number">1.</span> <span class="toc-text">1. Table Indexes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-B-Tree"><span class="toc-number">2.</span> <span class="toc-text">2. B+ Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-VS-B-Tree"><span class="toc-number">2.1.</span> <span class="toc-text">B-Tree VS. B+Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT"><span class="toc-number">2.3.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">2.4.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Conditions"><span class="toc-number">2.5.</span> <span class="toc-text">Selection Conditions</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Table-Indexes"><span class="toc-number">1.</span> <span class="toc-text">1. Table Indexes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-B-Tree"><span class="toc-number">2.</span> <span class="toc-text">2. B+ Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Tree-VS-B-Tree"><span class="toc-number">2.1.</span> <span class="toc-text">B-Tree VS. B+Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT"><span class="toc-number">2.3.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">2.4.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selection-Conditions"><span class="toc-number">2.5.</span> <span class="toc-text">Selection Conditions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Duplicate-Keys"><span class="toc-number">2.6.</span> <span class="toc-text">Duplicate Keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clustered-Indexes"><span class="toc-number">2.7.</span> <span class="toc-text">Clustered Indexes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-B-Tree-Design-Choices"><span class="toc-number">3.</span> <span class="toc-text">3. B+ Tree Design Choices</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-Size"><span class="toc-number">3.1.</span> <span class="toc-text">Node Size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge-Threshold"><span class="toc-number">3.2.</span> <span class="toc-text">Merge Threshold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variable-length-Keys"><span class="toc-number">3.3.</span> <span class="toc-text">Variable length Keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intra-Node-Search"><span class="toc-number">3.4.</span> <span class="toc-text">Intra-Node Search</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Optimizations"><span class="toc-number">4.</span> <span class="toc-text">4. Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pointer-Swizzling"><span class="toc-number">4.1.</span> <span class="toc-text">Pointer Swizzling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bulk-Insert"><span class="toc-number">4.2.</span> <span class="toc-text">Bulk Insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prefix-Compression"><span class="toc-number">4.3.</span> <span class="toc-text">Prefix Compression</span></a></li></ol></li></ol>
       </div>
     
 
