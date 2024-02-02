@@ -4,6 +4,52 @@
   
     
     <entry>
+      <title>新的一年，裁员大年</title>
+      <link href="/2024/02/02/24Y-Q1-02-02-One-Year/"/>
+      <url>/2024/02/02/24Y-Q1-02-02-One-Year/</url>
+      
+        <content type="html"><![CDATA[<p>狗裁员了，xbox裁员了。股票却涨了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Project #1: Buffer Pool Manager</title>
+      <link href="/2023/12/21/23Y-Q4-12-21-Project-1-Buffer-pool/"/>
+      <url>/2023/12/21/23Y-Q4-12-21-Project-1-Buffer-pool/</url>
+      
+        <content type="html"><![CDATA[<h2 id="类图">类图</h2><pre class="mermaid">---title: Extendible Hashing Table---classDiagram    HashTable <|-- ExtendibleHashTable    ExtendibleHashTable *-- Bucket    class HashTable{        Find(key,value)        Remove(key,value)        Insert(key,value)    }    class Bucket {        + IsFull() bool        + GetDepth() int        + IncrementDepth()        + GetItems()        + Find(key, value) bool        + Remove(key) bool        + Insert(key,value) bool        - size        - depth_        - list_    }    class ExtendibleHashTable {        + GetGlobalDepth()        + GetLocalDepth(int dir_index)        + GetNumBuckets()        + Find(key,value)        + Insert(key,value)        + Remove(key)        - global_depth_        - bucket_size_        - num_buckets        - latch_        - dir_    }</pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> CMU15-445 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CMU15-445 </tag>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Lecture #08: Trees Indexes</title>
       <link href="/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/"/>
       <url>/2023/11/24/23Y-Q4-11-24-Lecture-8-Trees-Indexes/</url>

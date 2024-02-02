@@ -6,7 +6,7 @@
   <link href="http://blog.ohtoai.fun/feed.xml" rel="self"/>
   
   <link href="http://blog.ohtoai.fun/"/>
-  <updated>2023-12-04T09:21:59.000Z</updated>
+  <updated>2024-02-02T11:06:42.000Z</updated>
   <id>http://blog.ohtoai.fun/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新的一年，裁员大年</title>
+    <link href="http://blog.ohtoai.fun/2024/02/02/24Y-Q1-02-02-One-Year/"/>
+    <id>http://blog.ohtoai.fun/2024/02/02/24Y-Q1-02-02-One-Year/</id>
+    <published>2024-02-02T11:06:00.000Z</published>
+    <updated>2024-02-02T11:06:42.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;狗裁员了，xbox裁员了。股票却涨了。&lt;/p&gt;
+</summary>
+        
+      
+    
+    
+    
+    
+    <category term="随笔" scheme="http://blog.ohtoai.fun/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Project #1: Buffer Pool Manager</title>
+    <link href="http://blog.ohtoai.fun/2023/12/21/23Y-Q4-12-21-Project-1-Buffer-pool/"/>
+    <id>http://blog.ohtoai.fun/2023/12/21/23Y-Q4-12-21-Project-1-Buffer-pool/</id>
+    <published>2023-12-21T13:44:30.000Z</published>
+    <updated>2023-12-21T13:45:13.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;类图&quot;&gt;类图&lt;/h2&gt;
+&lt;pre class=&quot;mermaid&quot;&gt;---
+title: Extendible Hashing Table
+---
+classDiagram
+    HashTable &lt;|-- ExtendibleHashTable
+   </summary>
+        
+      
+    
+    
+    
+    <category term="CMU15-445" scheme="http://blog.ohtoai.fun/categories/CMU15-445/"/>
+    
+    
+    <category term="CMU15-445" scheme="http://blog.ohtoai.fun/tags/CMU15-445/"/>
+    
+    <category term="数据库" scheme="http://blog.ohtoai.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Lecture #08: Trees Indexes</title>
